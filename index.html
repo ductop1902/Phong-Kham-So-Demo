@@ -1,5 +1,5 @@
 <!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>:root{color-scheme:light}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
-<title>Phòng Khám Số</title>
+<title>Nhịp Khám</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
@@ -835,20 +835,164 @@ details.tbl summary{cursor:pointer;color:var(--printed);font-size:13.5px;font-we
 /* Chọn khoảng báo cáo ở 360: ô giữa rộng hơn để chữ "7 ngày gần nhất" không bị cắt */
 @media (max-width:600px){.rp-seg{grid-template-columns:1fr 1.35fr 1fr}.rp-seg .btn{white-space:nowrap;padding-inline:4px}}
 
+
+/* ===== Bản 19: làm đẹp sâu theo bảng tiêu chí (giữ Hướng 1: Be Vietnam Pro, mận #5A2D6E, mận nhạt #F5F0F7) ===== */
+/* Thang chữ: tiêu đề trang 22, tiêu đề nhóm 15.5, tên khách 15, dòng phụ 13.5. Nhịp khoảng cách bội 4: trong nhóm 4–8, giữa nhóm 28. */
+
+/* 0. Đầu trang dính thật: body không bị giới hạn chiều cao (trước đây html,body{height:100%} làm đầu trang trôi mất khi cuộn dài) */
+html,body{height:auto}
+body{min-height:100vh}
+.shell{min-height:0}
+
+/* 1. Đầu trang: biểu tượng N, tên phòng khám lớn, Nhịp Khám nhỏ */
+.brand.nk{display:flex;flex-direction:row;align-items:center;gap:10px;min-width:0}
+.brand b::before{content:none}
+.nk-logo{flex:none;width:30px;height:30px;display:block}
+.nk-logo svg{width:100%;height:100%;display:block}
+.nk-txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.nk-clinic{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.01em;white-space:nowrap}
+.nk-sub{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--printed);white-space:nowrap}
+.nk-prod{color:var(--brand);font-weight:600}
+.nk-sub #clinic{display:inline;font-size:12.5px;color:var(--printed);padding-left:8px;border-left:1px solid var(--rule)}
+.role{gap:10px}
+.role-l{font-size:13.5px;color:var(--printed)}
+@media (max-width:820px){
+  .nk-logo{width:26px;height:26px}
+  .nk-clinic{font-size:16px}
+  .nk-sub{display:none}
+}
+
+/* 2. Đầu trang, menu, dải bản thử cùng mép với nội dung ở mọi độ rộng máy tính */
+@media (min-width:821px){
+  main{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+  header.top,.sample-bar{padding-left:max(24px,calc((100% - 1320px) / 2));padding-right:max(24px,calc((100% - 1320px) / 2))}
+  nav.side{padding-left:max(24px,calc((100% - 1320px) / 2));padding-right:max(24px,calc((100% - 1320px) / 2))}
+  header.top{gap:12px 24px}
+  /* Menu dính ngay dưới đầu trang, nền đặc, viền dưới rõ (trước đây hở một khe, chữ bảng lộ ra) */
+  nav.side{top:calc(var(--hh,57px) + env(safe-area-inset-top,0px));background:var(--paper);border-bottom:1px solid var(--rule);box-shadow:0 1px 0 var(--rule)}
+  header.top{border-bottom:1px solid var(--rule)}
+}
+
+/* 3. Tiêu đề nhóm: bỏ dải nền giống hệt nhau; chữ đậm, số đếm nhẹ, gạch mảnh dưới. Thứ bậc nhờ cỡ chữ và khoảng cách */
+.panel>header{background:none;border-radius:0;padding:0 0 8px;border-bottom:1px solid var(--rule);align-items:baseline}
+.panel>header h3{font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:-.005em}
+.panel>header h3 .n{background:none;border:0;color:var(--printed);font-weight:600;font-size:14px;min-width:0;padding:0;margin-left:6px;line-height:inherit}
+.panel>header small{font-size:13px}
+.panel{gap:2px}
+.flow{gap:28px 40px}
+.flow-main,.flow-side{gap:28px}
+.wrap{gap:20px}
+.head h2{font-size:22px;letter-spacing:-.015em}
+.panel .list>.row:first-child{border-top:0}
+
+/* 4. Hàng lịch: giờ, tên, dòng phụ thẳng cột; hàng thoáng hơn */
+.row.ap{padding-block:9px;column-gap:14px}
+.row.ap .time{font-size:15.5px;font-weight:700;color:var(--ink)}
+.row .main .nm{font-size:15px}
+.row .main .sub{font-size:13.5px;margin-top:1px}
+
+/* 5. Nút lặp lại: chỉ khách kế tiếp có nút đậm. Các hàng khác nút dạng chữ mận, rê chuột vào hàng mới hiện viền */
+.next-tag{font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:4px;padding:1px 6px;letter-spacing:.01em}
+.row.ap.is-next{background:var(--brand-soft);border-radius:8px;padding-inline:10px;margin-inline:-10px;border-top-color:transparent}
+.row.ap.is-next+.row{border-top-color:transparent}
+.sec-coming .row.ap:not(.is-next) .acts2 .btn,.sec-late .row.ap .acts2 .btn:not(.ghost){border-color:transparent;background:none;color:var(--brand);box-shadow:none}
+@media (hover:hover){
+  .sec-coming .row.ap:not(.is-next):hover .acts2 .btn,.sec-late .row.ap:hover .acts2 .btn:not(.ghost){border-color:var(--brand-line);background:var(--paper)}
+  .sec-coming .row.ap:not(.is-next):hover,.sec-late .row.ap:hover{background:var(--grey)}
+}
+.sec-coming .row.ap:not(.is-next) .acts2 .btn:focus-visible,.sec-late .row.ap .acts2 .btn:focus-visible{border-color:var(--brand)}
+/* "Chưa xác nhận" đã ghi ở đầu dòng phụ, không lặp thành cột riêng */
+.sec-coming .row.ap>.pill,.sec-coming .pill-m{display:none}
+.row.ap .sub .todo{font-weight:600}
+
+/* 6. Tình trạng ghế: ô 2×2, dòng 1 tên ghế và trạng thái, dòng 2 việc cần biết */
+.chairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.chair{display:flex;flex-direction:column;align-items:stretch;gap:2px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:9px 12px;font-size:13.5px}
+.chair>b{font-size:14.5px;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline}
+.chair{position:relative}
+.chair .st{position:absolute;top:9px;right:12px;font-size:12.5px;font-weight:600;color:var(--printed)}
+.chair.busy .st{color:var(--brand)}
+.chair.call{border-color:var(--brand-line);background:var(--brand-soft)}
+.chair.call .st{color:var(--brand)}
+.chair .dt{color:var(--printed);line-height:1.4}
+.chair .dt .inc{color:var(--ink);font-weight:600}
+.chair .dt .inc::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mark);margin-right:5px;vertical-align:1px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.chair em{display:none}
+
+/* 7. Hẹn tái khám: nút xem cả danh sách thẳng mép trái, có khoảng thở */
+.sec-recall .list>.btn[data-act="nav"]{align-self:flex-start;margin-top:6px;padding-inline:0;color:var(--brand);font-weight:600}
+.panel .list{display:flex;flex-direction:column}
+
+/* 8. Tiếp nhận qua mã QR ở cột phải: mã nhỏ, chữ gọn */
+.flow-side .qr-real{margin:0}
+.flow-side .qr-real .qrimg{width:96px;height:96px}
+.flow-side .panel:has(.qr-real)>header small{display:block;flex-basis:100%}
+.flow-side .panel:has(.qr-real) p{font-size:12.5px;margin:2px 0;color:var(--printed)}
+
+/* 9. Nhãn dị ứng không dính tên */
+.link+.alg,.pn+.alg,b+.alg{margin-left:8px}
+.nm .link+.alg,.nm .pn+.alg{margin-left:0}
+/* 10. Bảng: dòng tiêu đề dính dưới menu khi cuộn (máy tính); số không là dấu gạch nhẹ */
+@media (min-width:1024px){
+  .panel>.scroll:has(>table.t:not(.matrix)){overflow:visible}
+  .panel>.scroll>table.t:not(.matrix)>thead th{position:sticky;top:calc(var(--hh,57px) + var(--nh,44px) + env(safe-area-inset-top,0px));background:var(--paper);z-index:5;box-shadow:inset 0 -1px 0 var(--ink)}
+}
+.t .nil{color:var(--printed);opacity:.55;font-weight:600}
+
+/* Đang chờ khám: chấm vàng trước tên thay cho nhãn "Đang chờ khám" lặp ở mọi hàng (vàng chỉ dành cho khách đang ở phòng khám) */
+.sec-wait .row.ap>.pill{display:none}
+.sec-wait .row.ap .nm .pn::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mark);margin-right:7px;vertical-align:1px;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
+/* Điện thoại: luật cũ ".brand span{display:none}" từng ẩn mất biểu tượng và tên phòng khám */
+.brand.nk>span.nk-logo{display:block}
+.brand.nk>span.nk-txt{display:flex}
+/* Điện thoại: nút dạng chữ gom về bên phải trên một dòng, hàng thấp hơn */
+@media (max-width:820px){
+  .row.ap .acts2{display:flex;justify-content:flex-end;gap:4px;grid-column:2 / -1;padding-top:2px}
+  .row.ap .acts2 .btn{width:auto;min-width:0}
+  .row.ap.is-next .acts2{justify-content:stretch}
+  .row.ap.is-next .acts2 .btn{flex:1 1 0}
+  .chairs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* Nội dung hẹn */
+.ap-note{font-size:13px;color:var(--ink);margin-top:2px;line-height:1.35}
+.ap-note::before{content:"Nội dung: ";color:var(--printed)}
+.cal .appt i.ap-note{display:block;font-style:normal;font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal .appt i.ap-note::before{content:none}
+.ap-note-box{margin:0;background:var(--brand-soft);border-radius:8px;padding:8px 12px;font-size:14px;display:flex;flex-direction:column;gap:2px}
+.ap-note-box b{font-size:12.5px;color:var(--printed);font-weight:600}
+/* Điện thoại: đầu trang một hàng (tên phòng khám, vai trò), ô ghế một cột */
+@media (max-width:820px){.role-l{display:none}.chairs{grid-template-columns:minmax(0,1fr)}}
+/* Phiếu thu trên máy tính: khung vừa đọc, ô nhập không kéo dài hết màn */
+@media (min-width:821px){#billBox{max-width:760px}}
+/* Hồ sơ trên điện thoại: nút chính một hàng, hai nút phụ chia đôi hàng dưới */
+@media (max-width:600px){
+  .head .actions:has(> .btn:nth-child(3)){display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+  .head .actions:has(> .btn:nth-child(3))>.btn:first-child{grid-column:1 / -1}
+}
+/* 360: tên phòng khám và vai trò vẫn chung một hàng */
+@media (max-width:400px){
+  .nk-clinic{font-size:15px}
+  .nk-logo{width:24px;height:24px}
+  .brand.nk{gap:8px}
+  .role select{max-width:min(172px,48vw);padding-inline:8px}
+  .nk-clinic{overflow:hidden;text-overflow:ellipsis}
+}
+.sec-late .row.ap>.pill,.sec-late .pill-m{display:none}
+
 </style>
 
 <div class="sample-bar" role="note" id="sampleBar">
   <span class="sb-t">Bản chạy thử<span class="long">. Toàn bộ là dữ liệu mẫu, không nhập dữ liệu người bệnh thật</span><span class="short">: dữ liệu mẫu</span></span>
-  <button type="button" class="sb-tog" aria-expanded="false" aria-controls="sbActs">Tùy chọn</button><span class="sb-acts" id="sbActs"><a class="sb-link" href="https://claude.ai/artifact/82CHVEQcbBeeyTXrtJBvQ8" target="_blank" rel="noopener"><span class="long">Trang bàn giao bản 18</span><span class="short">Bàn giao</span></a><label class="sb-clock"><span class="long">Giờ thử</span><select id="simClock" aria-label="Giờ thử, chỉ có trong bản chạy thử"><option value="">Giờ thật</option><option>08:00</option><option>09:45</option><option>12:00</option><option>17:40</option></select></label><button type="button" id="reset" data-act="reset" aria-label="Đặt lại dữ liệu mẫu">Đặt lại<span class="long"> dữ liệu mẫu</span></button></span>
+  <button type="button" class="sb-tog" aria-expanded="false" aria-controls="sbActs">Tùy chọn</button><span class="sb-acts" id="sbActs"><a class="sb-link" href="https://claude.ai/artifact/82CHVEQcbBeeyTXrtJBvQ8" target="_blank" rel="noopener"><span class="long">Trang bàn giao bản 19</span><span class="short">Bàn giao</span></a><label class="sb-clock"><span class="long">Giờ thử</span><select id="simClock" aria-label="Giờ thử, chỉ có trong bản chạy thử"><option value="">Giờ thật</option><option>08:00</option><option>09:45</option><option>12:00</option><option>17:40</option></select></label><button type="button" id="reset" data-act="reset" aria-label="Đặt lại dữ liệu mẫu">Đặt lại<span class="long"> dữ liệu mẫu</span></button></span>
 </div>
 <header class="top">
-  <div class="brand"><b><span class="pn-full">Phòng Khám Số</span><span class="pn-clinic">Nha Khoa Tâm</span></b><span id="clinic">Nha Khoa Tâm, Thiệu Hóa, Thanh Hóa</span></div>
+  <div class="brand nk"><span class="nk-logo" title="Nhịp Khám"><svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="116" fill="#5A2D6E"/><path d="M150 360 L150 152 L362 360 L362 152" fill="none" stroke="#FFFFFF" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nk-txt"><strong class="nk-clinic">Nha Khoa Tâm</strong><span class="nk-sub"><span class="nk-prod">Nhịp Khám</span><span id="clinic">Thiệu Hóa, Thanh Hóa</span></span></span></div>
   <div class="search">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-    <input id="q" type="search" autocomplete="off" placeholder="Tên khách hoặc 4 số cuối điện thoại" aria-label="Tìm khách">
+    <input id="q" type="search" autocomplete="off" placeholder="Tên hoặc 4 số cuối điện thoại" aria-label="Tìm khách">
     <div class="results" id="results" hidden></div>
   </div>
-  <label class="role">Đang dùng với vai trò
+  <label class="role"><span class="role-l">Vai trò</span>
     <select id="roleSel" aria-label="Vai trò">
       <option value="letan">Lễ tân</option>
       <option value="bacsi">Bác sĩ</option>
@@ -866,7 +1010,7 @@ details.tbl summary{cursor:pointer;color:var(--printed);font-size:13.5px;font-we
 <div id="toastBox"></div>
 
 <script>
-/* so-do-rang-v4.js — bản 4: bỏ lợi, cần nhổ là viền đỏ + dấu gọn, ô mặt răng nhạt khi chưa chọn. Sơ đồ răng tự vẽ bằng SVG cho Phòng Khám Số.
+/* so-do-rang-v4.js — bản 4: bỏ lợi, cần nhổ là viền đỏ + dấu gọn, ô mặt răng nhạt khi chưa chọn. Sơ đồ răng tự vẽ bằng SVG cho Nhịp Khám.
    Nguồn hình: tự vẽ bằng mã trong file này (dựng từ thông số từng loại răng). Không dùng hình bên ngoài, dùng thương mại được.
    Không cần thư viện. Dùng: SoDoRang.render(phanTu, {rang:{36:'sau'}, mat:{36:{N:'sau',G:'sau'}}, boRang:'vinh'|'sua', hamPhongTo:'all'|'up'|'lo', chon:[36], tuongTac:true})
    Mã tình trạng cả răng: ok, sau, tram, tuy, nho, mat, su, implant.
@@ -1116,7 +1260,7 @@ function seedData(){
               d3:[[510,'xong','implant'],[600,'xacnhan','kham'],[690,'khongden','caovoi'],[870,'dat','nieng'],[990,'xacnhan','kham']]};
   for(const did in plan) for(const [start,status,sid] of plan[did]){
     const p=nextP(),s=svc(sid);
-    const a={id:'a'+(D.seq++),pid:p.id,did,cid:(sid==='implant'||sid==='nieng')?'g4':HOME_CHAIR[did],date:TODAY,start,dur:s.dur,sid,status,note:'',arrivedAt:status==='den'?hm(Math.max(0,Math.min(start-10,nowMin()-3))):null};
+    const a={id:'a'+(D.seq++),pid:p.id,did,cid:(sid==='implant'||sid==='nieng')?'g4':HOME_CHAIR[did],date:TODAY,start,dur:s.dur,sid,status,note:'',arrivedAt:status==='den'?hm(Math.max(0,Math.min(start-10,nowMin()-3))):null};if(D.seq%2===0&&NOTE_SAMPLE[sid])a.note=NOTE_SAMPLE[sid];
     D.appts.push(a);
     if(status==='xong'){
       const items=[{name:'Khám và tư vấn',price:0,qty:1}];if(sid!=='kham')items.push({name:s.name,price:s.price,qty:1});
@@ -1129,7 +1273,7 @@ function seedData(){
     }
   }
   {const a0=D.appts.find(a=>a.did==='d1'&&a.status==='den');if(a0)Object.assign(D.patients.find(p=>p.id===a0.pid).teeth,{17:'sau',25:'sau',26:'tram',36:'su',46:'tuy',48:'nho'})}
-  D.sampleV=18;
+  D.sampleV=19;
   D.hist=histSeed();
   [[540,'d1','tram'],[600,'d2','caovoi'],[840,'d3','su'],[900,'d1','kham']].forEach(([start,did,sid])=>{const p=nextP();D.appts.push({id:'a'+(D.seq++),pid:p.id,did,cid:HOME_CHAIR[did],date:addDays(TODAY,1),start,dur:svc(sid).dur,sid,status:'xacnhan',note:'',arrivedAt:null})});
   // nợ cũ
@@ -1154,10 +1298,11 @@ function histSeed(){const r=rng(13051126),out=[];
     out.push(day)}
   return out}
 /* ---------- Trạng thái ---------- */
+const NOTE_SAMPLE={tuy:'Điều trị tủy răng 46, lần 2',tram:'Trám lại răng 36, miếng trám cũ bị bể',kham:'Đau nhức hàm dưới bên phải 3 ngày',su:'Thử sườn sứ răng 21',nho:'Nhổ răng khôn 38 mọc lệch',caovoi:'Khách hay chảy máu chân răng khi chải',nieng:'Thay chun, kiểm tra mắc cài',implant:'Tái khám sau đặt trụ răng 46',trang:'Tẩy trắng lần 2'};
 const KEY='phongkhamso-thu-v5';
 let D, UI={role:'letan',view:'today',pid:null,apptId:null,billId:null,calDate:TODAY,tsel:[]};
 function load(){
-  try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&o.D&&o.day===TODAY&&o.D.sampleV===18){D=o.D;D.appts.forEach(a=>{if(!a.cid)a.cid=HOME_CHAIR[a.did]||'g1'});UI=Object.assign(UI,o.UI||{},{tsel:[]});return}}}catch(e){}
+  try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&o.D&&o.day===TODAY&&o.D.sampleV===19){D=o.D;D.appts.forEach(a=>{if(!a.cid)a.cid=HOME_CHAIR[a.did]||'g1'});UI=Object.assign(UI,o.UI||{},{tsel:[]});return}}}catch(e){}
   D=seedData();
 }
 let draftAt='';
@@ -1266,7 +1411,7 @@ function revealTooth(n){if(!matchMedia('(max-width:820px)').matches)return;const
 function go(view,extra){Object.assign(UI,{view},extra||{});if(view==='hoso'&&UI.pid)audit(UI.pid,'Xem hồ sơ');render();window.scrollTo(0,0)}
 
 /* ---------- Hôm nay ---------- */
-function apptRow(a,btns){const p=P(a.pid);const segs=[svc(a.sid).name,docName(a.did)];if(a.cid)segs.push(chairName(a.cid));if(a.arrivedAt&&!a.walkin)segs.push('đến '+a.arrivedAt);return `<div class="row ap"><span class="time">${tn(a.walkin?a.arrivedAt:hm(a.start))}</span><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${a.walkin?'<span class="pill plain">Vãng lai</span>':''}${algTag(p)}${a.status==='dat'?'<span class="pill s-dat pill-m">Chưa xác nhận</span>':''}</div><div class="sub">${segs.map(nw).join(', ')}</div></div>${pill(a.status)}${btns||''}</div>`}
+function apptRow(a,btns){const p=P(a.pid);const segs=[svc(a.sid).name,docName(a.did)];if(a.cid)segs.push(chairName(a.cid));if(a.arrivedAt&&!a.walkin)segs.push('đến '+a.arrivedAt);return `<div class="row ap"><span class="time">${tn(a.walkin?a.arrivedAt:hm(a.start))}</span><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${a.walkin?'<span class="pill plain">Vãng lai</span>':''}${algTag(p)}${a.status==='dat'?'<span class="pill s-dat pill-m">Chưa xác nhận</span>':''}</div><div class="sub">${segs.map(nw).join(', ')}</div>${a.note&&!a.walkin?`<div class="ap-note">${esc(a.note)}</div>`:''}</div>${pill(a.status)}${btns||''}</div>`}
 function vToday(){
   const r=UI.role, todays=D.appts.filter(a=>a.date===TODAY).sort((a,b)=>a.start-b.start);
   const head=(t,sub,acts)=>`<div class="head h-inline"><div><h2>${t}</h2><p>${sub}</p></div><div class="actions">${acts||''}</div></div>`;
@@ -1287,25 +1432,27 @@ function vToday(){
     const lateRow=a=>apptRow(a,lateActs(a)).replace('<div class="sub">',`<div class="sub"><span class="nw todo">${lateTxt(a)}</span>, `);
     const sec=(t,n,sub,body,cls)=>`<section class="panel step-sec ${cls||''}"><header><h3>${t} <span class="n">${n}</span></h3>${sub?`<small>${sub}</small>`:''}</header><div class="list">${body}</div></section>`;
     const chairs=CHAIRS.map(c=>{const cur=todays.find(a=>a.cid===c.id&&a.status==='kham');
-      if(cur){const end=cur.start+cur.dur,left=end-nm;return `<div class="chair busy"><b>${c.name}</b><span>Đang khám ${esc(P(cur.pid).name)}, ${docName(cur.did).replace('BS. ','')}, ${left>=0?'còn '+dur(left):'quá giờ '+dur(-left)}</span><em>đến ${tn(hm(end))}</em></div>`}
+      const tile=(st,cls,dt)=>`<div class="chair ${cls}"><b>${c.name}</b><span class="st">${st}</span><span class="dt">${dt}</span></div>`;
+      if(cur){const end=cur.start+cur.dur,left=end-nm;return tile('Đang khám','busy',`<span class="inc">${esc(P(cur.pid).name)}</span>, ${docName(cur.did).replace('BS. ','')}, ${left>=0?'xong lúc '+tn(hm(end)):'<span class="todo">quá giờ '+dur(-left)+'</span>'}`)}
       const wt=todays.filter(a=>a.cid===c.id&&a.status==='den').sort((a,b)=>a.start-b.start)[0];
-      if(wt)return `<div class="chair"><b>${c.name}</b><span>Trống, ${esc(P(wt.pid).name)} đang chờ khám</span><em>mời vào</em></div>`;
+      if(wt)return tile('Trống','call',`Mời vào: <span class="inc">${esc(P(wt.pid).name)}</span>`);
       const nx=coming.filter(a=>a.cid===c.id)[0], nl=late.filter(a=>a.cid===c.id).length;
-      if(nx)return `<div class="chair"><b>${c.name}</b><span>Trống, tiếp theo ${esc(P(nx.pid).name)}, ${nx.start>nm?'còn '+dur(nx.start-nm):'đã đến giờ'}${nl?`, <span class="todo">${nl} khách quá giờ</span>`:''}</span><em>${tn(hm(nx.start))}</em></div>`;
-      return `<div class="chair"><b>${c.name}</b><span>Trống, hết lịch${nl?`, <span class="todo">${nl} khách chưa đến</span>`:' hôm nay'}</span><em></em></div>`}).join('');
+      const miss=nl?`, <span class="todo">${nl} khách chưa đến</span>`:'';
+      if(nx)return tile('Trống','',`Tiếp theo ${tn(hm(nx.start))} ${esc(P(nx.pid).name)}${miss}`);
+      return tile('Trống','',`Hết lịch hôm nay${miss}`)}).join('');
     const recall=D.patients.filter(p=>!p.deleted&&p.recallDue&&p.recallDue<=addDays(TODAY,7)&&!hasUpcoming(p)).sort((a,b)=>a.recallDue.localeCompare(b.recallDue));
     return head('Việc hôm nay',`${date}, ${todays.filter(a=>a.status!=='huy').length} lịch hẹn, ${clock()}${closed?', đã hết giờ làm việc':''}`,`<button class="btn primary big" data-act="new-appt">+ Thêm lịch</button><button class="btn big" data-act="new-p">+ Khách mới</button>`)
     +`<div class="flow"><div class="flow-main">
     ${sec('Đang chờ khám',waiting.length,'khách đã đến, chờ bác sĩ gọi',waiting.map(a=>apptRow(a)).join('')||'<div class="empty">Chưa có khách nào đang chờ.</div>','sec-wait')}
-    ${sec('Sắp đến',coming.length,notConfirmed?`<span class="todo">${notConfirmed} chưa xác nhận</span>`:'đã xác nhận hết',coming.map(a=>apptRow(a,acts(a))).join('')||'<div class="empty">Không còn khách nào sắp đến hôm nay.</div>','sec-coming'+(coming.length?'':' is-empty'))}
+    ${sec('Sắp đến',coming.length,notConfirmed?`<span class="todo">${notConfirmed} chưa xác nhận</span>`:'đã xác nhận hết',coming.map(a=>{let h=apptRow(a,acts(a));if(a.status==='dat')h=h.replace('<div class="sub">','<div class="sub"><span class="nw todo">chưa xác nhận</span>, ');if(lead&&a.id===lead.id)h=h.replace('<div class="row ap">','<div class="row ap is-next">').replace(/(<div class="nm">.*?<\/button>)/,'$1<span class="next-tag">Kế tiếp</span>');return h}).join('')||'<div class="empty">Không còn khách nào sắp đến hôm nay.</div>','sec-coming'+(coming.length?'':' is-empty'))}
     ${late.length?sec(closed?'Chưa đến':'Quá giờ',late.length,closed?'<span class="todo">đã hết giờ làm việc, bấm Không đến để chốt sổ</span>':'<span class="todo">quá giờ hẹn hơn 15 phút, chưa đến</span>',late.slice(0,5).map(lateRow).join('')+(late.length>5?`<details class="more-late"><summary>Xem thêm ${late.length-5} khách quá giờ</summary>${late.slice(5).map(lateRow).join('')}</details>`:''),'sec-late'):''}
     </div><div class="flow-side">
     <section class="panel"><header><h3>Tình trạng ghế</h3><small>${clock()}</small></header><div class="chairs">${chairs}</div></section>
     ${sec('Đang khám',inChair.length,'',inChair.map(a=>apptRow(a)).join('')||'<div class="empty">Chưa có khách đang khám.</div>','sec-kham')}
     ${sec('Chờ thu tiền',toPay.length,'đã khám xong, chưa thanh toán',toPay.map(b=>{const p=P(b.pid);return `<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(b.items.map(i=>i.name).join(', ')))}, ${nw(docName(b.did))}</div></div></div>`}).join('')||'<div class="empty">Không có khách chờ thu tiền.</div>','sec-pay')}
     ${sec('Hẹn tái khám',recall.length,'đến hạn hoặc quá hạn, chưa có lịch',recall.slice(0,5).map(p=>`<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(p.recallReason))}, ${nw('đến hạn '+vnDate(p.recallDue))}</div></div><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button></div>`).join('')+(recall.length>5?`<button class="btn sm ghost" data-act="nav" data-v="chamsoc">Xem cả ${recall.length} khách</button>`:'')||'<div class="empty">Không có khách đến hạn tái khám.</div>','sec-recall')}
-    </div></div>
-    ${intakePanel()}`;
+    ${intakePanel()}
+    </div></div>`;
   }
   if(r==='bacsi'){
     const mine=todays.filter(a=>a.did===me().did);
@@ -1448,9 +1595,9 @@ function vLich(){
   const sel=UI.calRes&&RES.some(r=>r.id===UI.calRes)?UI.calRes:RES[0].id;
   const narrow=matchMedia('(max-width:820px)').matches, COLS=narrow?RES.filter(r=>r.id===sel):RES;
   const editable=can.editAppt();
-  const times=[];for(let m=DAY0;m<DAY1;m+=SLOT)times.push(`<div>${m%60?'':hm(m)}</div>`);
+  const times=[];for(let m=DAY0;m<DAY1;m+=SLOT)times.push(`<div>${m%60||(UI.calDate===TODAY&&Math.abs(m-nowMin())<14)?'':hm(m)}</div>`);
   const sub=a=>by==='ghe'?docName(a.did).replace('BS. ',''):chairName(a.cid);
-  const cols=COLS.map(r=>`<div class="col" data-by="${by}" data-k="${r.id}" style="height:${(DAY1-DAY0)/SLOT*SLOTPX}px">${nowLine()}${appts.filter(a=>a[key]===r.id).map(a=>{const p=P(a.pid);return `<button type="button" class="appt s-${a.status}${a.status==='huy'?' huy':''}" data-act="appt" data-id="${a.id}" ${editable&&!['xong','kham','huy'].includes(a.status)?'draggable="true"':''} style="top:${(a.start-DAY0)/SLOT*SLOTPX+1}px;height:${Math.max(a.dur/SLOT*SLOTPX-3,26)}px"><b>${hm(a.start)} ${esc(p.name)}${algTag(p,1)}</b><span>${svc(a.sid).name}, ${sub(a)}</span></button>`}).join('')}</div>`).join('');
+  const cols=COLS.map(r=>`<div class="col" data-by="${by}" data-k="${r.id}" style="height:${(DAY1-DAY0)/SLOT*SLOTPX}px">${nowLine()}${appts.filter(a=>a[key]===r.id).map(a=>{const p=P(a.pid);return `<button type="button" class="appt s-${a.status}${a.status==='huy'?' huy':''}" data-act="appt" data-id="${a.id}" ${editable&&!['xong','kham','huy'].includes(a.status)?'draggable="true"':''} style="top:${(a.start-DAY0)/SLOT*SLOTPX+1}px;height:${Math.max(a.dur/SLOT*SLOTPX-3,26)}px"><b>${hm(a.start)} ${esc(p.name)}${algTag(p,1)}</b><span>${svc(a.sid).name}, ${sub(a)}</span>${a.note&&!a.walkin?`<i class="ap-note">${esc(a.note)}</i>`:''}</button>`}).join('')}</div>`).join('');
   const walkBox=walk.length?`<section class="panel walkpanel" style="gap:8px"><header><h3>Hàng chờ vãng lai</h3><small>Không xếp vào lịch để tránh chồng giờ. Bác sĩ gọi khách nào thì khách đó mới nhận ghế còn trống.</small></header><div class="walkq">${walk.map(a=>`<button class="chip" data-act="appt" data-id="${a.id}"><b>${esc(P(a.pid).name)}</b>, đến ${a.arrivedAt}, ${docName(a.did).replace('BS. ','')}${a.status==='kham'?', đang khám '+(a.cid?chairName(a.cid):''):''}</button>`).join('')||'<span class="empty">Không có khách vãng lai đang chờ.</span>'}</div></section>`:'';
   const legendBox=`<details class="legend-box"${narrow?'':' open'}><summary>Chú giải màu</summary><div class="legend">${Object.keys(ST).map(pill).join('')}<span style="font-size:12px;color:var(--muted);align-self:center">Tô vàng là khách đang ở phòng khám. Chữ nâu cam là chưa gọi xác nhận. Nhãn đỏ là dị ứng. Gạch ngang là hủy hoặc không đến. Vạch mận là giờ hiện tại.</span></div></details>`;
   const head=r=>by==='ghe'?`${r.name}<small>${r.note}</small>`:`${r.name}<small>${appts.filter(a=>a.did===r.id&&a.status!=='huy').length} lịch</small>`;
@@ -1474,7 +1621,7 @@ function vKhach(){
   const list=D.patients.filter(p=>!p.deleted).sort((a,b)=>(b.history[0]?.date||'').localeCompare(a.history[0]?.date||''));
   return `<div class="head"><div><h2>Khách hàng</h2><p>${D.patients.length} hồ sơ mẫu, tìm nhanh ở ô trên cùng</p></div><div class="actions">${can.editPatient()?'<button class="btn primary" data-act="new-p">+ Khách mới</button>':''}</div></div>
   <section class="panel"><div class="scroll"><table class="t"><thead><tr><th>Khách</th><th>Điện thoại</th><th>Lần gần nhất</th><th>Nguồn</th><th class="num">Công nợ</th></tr></thead><tbody>
-  ${list.map(p=>{const debt=D.bills.filter(b=>b.pid===p.id).reduce((t,b)=>t+remain(b),0);return `<tr><td><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}<div style="font-size:12px;color:var(--muted)">${p.code}, ${p.group}</div></td><td>${p.phone}</td><td>${p.history[0]?vnDate(p.history[0].date):'Chưa khám'}</td><td>${p.source}</td><td class="num">${debt?`<b style="color:var(--danger)">${money(debt)}</b>`:'0 đ'}</td></tr>`}).join('')}
+  ${list.map(p=>{const debt=D.bills.filter(b=>b.pid===p.id).reduce((t,b)=>t+remain(b),0);return `<tr><td><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}<div style="font-size:12px;color:var(--muted)">${p.code}, ${p.group}</div></td><td>${p.phone}</td><td>${p.history[0]?vnDate(p.history[0].date):'Chưa khám'}</td><td>${p.source}</td><td class="num">${debt?`<b style="color:var(--danger)">${money(debt)}</b>`:'<span class="nil" aria-label="Không nợ">–</span>'}</td></tr>`}).join('')}
   </tbody></table></div></section>`;
 }
 /* Sơ đồ răng vẽ theo loại răng: cửa, nanh, hàm nhỏ, hàm lớn. Việc cần làm ghi đỏ, việc đã làm ghi mực. */
@@ -1721,7 +1868,7 @@ function apptForm(o){
    <label class="f">Bác sĩ<select id="ap-did">${DOCTORS.map(d=>`<option value="${d.id}" ${d.id===did?'selected':''}>${d.name}</option>`).join('')}</select></label>
    <label class="f">Ghế<select id="ap-cid"><option value="">Tự xếp ghế trống</option>${CHAIRS.map(c=>`<option value="${c.id}" ${c.id===o.cid?'selected':''}>${c.name} (${c.note})</option>`).join('')}</select></label>
    <label class="f">Dịch vụ<select id="ap-sid">${SERVICES.map(s=>`<option value="${s.id}" ${s.id===sid?'selected':''}>${s.name} (${s.dur} phút)</option>`).join('')}</select></label></div>
-   <label class="f">Ghi chú<input id="ap-note" placeholder="Không bắt buộc"></label>
+   <label class="f">Nội dung hẹn<input id="ap-note" placeholder="Ví dụ: điều trị tủy răng 46, thay chun" value="${esc(o.note||'')}"></label>
    <footer><button class="btn" data-act="close">Hủy</button><button class="btn primary" data-act="save-appt">Lưu lịch hẹn</button></footer>`);
 }
 function patientForm(p){
@@ -1748,7 +1895,7 @@ function patientForm(p){
 function apptMenu(a){
   const p=P(a.pid),ed=can.editAppt(),open=['dat','xacnhan'].includes(a.status);
   const b=(act,l,pr)=>`<button class="btn ${pr?'primary':''}" data-act="${act}" data-id="${a.id}">${l}</button>`;
-  modal(`<h3>${esc(p.name)}, ${hm(a.start)}</h3><p style="margin:0;color:var(--muted);font-size:14px">${dayLabel(a.date)}, ${svc(a.sid).name}, ${docName(a.did)}, ${chairName(a.cid)}</p><div>${pill(a.status)}</div>
+  modal(`<h3>${esc(p.name)}, ${hm(a.start)}</h3><p style="margin:0;color:var(--muted);font-size:14px">${dayLabel(a.date)}, ${svc(a.sid).name}, ${docName(a.did)}, ${chairName(a.cid)}</p>${a.note&&!a.walkin?`<p class="ap-note-box"><b>Nội dung hẹn</b>${esc(a.note)}</p>`:''}<div>${pill(a.status)}</div>
    <footer style="justify-content:flex-start">${ed&&open&&a.date===TODAY?b('arrive','Khách đã đến',true):''}${ed&&a.status==='dat'?b('confirm','Xác nhận'):''}${ed&&open?b('resched','Đổi lịch'):''}${UI.role==='bacsi'&&a.did===me().did&&['den','kham'].includes(a.status)?b('start-exam','Bắt đầu khám',true):''}${ed&&open?b('noshow','Không đến')+b('cancel','Hủy lịch'):''}${ed&&a.status==='den'?b('cancel','Khách bỏ về'):''}${ed&&['huy','khongden'].includes(a.status)?b('restore','Khôi phục lịch'):''}<button class="btn" data-act="open-p" data-id="${p.id}">Hồ sơ</button><button class="btn ghost" data-act="close">Đóng</button></footer>`);
 }
 
@@ -1841,8 +1988,8 @@ document.addEventListener('click',e=>{
       let cid=$('#ap-cid').value;if(cid){const cc=chairConflict(cid,date,start,dur,editId);if(cc){toast(`${chairName(cid)} đã có khách lúc ${hm(cc.start)} (${P(cc.pid).name}). Chọn ghế khác hoặc Tự xếp ghế trống`,true);return}}
       else{cid=[HOME_CHAIR[did],...CHAIRS.map(x=>x.id)].find(x=>x&&!chairConflict(x,date,start,dur,editId));if(!cid){toast('Hết ghế trống trong khung giờ này',true);return}}
       const same=D.appts.find(a=>a.pid===pid&&a.id!==editId&&a.date===date&&!['huy','khongden','xong'].includes(a.status)&&start<a.start+a.dur&&a.start<start+dur);if(same){toast(`Khách đã có lịch ${hm(same.start)} với ${docName(same.did)}`,true);return}
-      if(editId){const a=A(editId);Object.assign(a,{did,cid,date,start,dur,sid});if($('#ap-note').value)a.note=$('#ap-note').value;audit(pid,'Đổi lịch sang '+vnDate(date)+' '+hm(start)+', '+chairName(cid))}
-      else{addAppt({pid,did,cid,date,start,dur,sid,status:'dat',note:$('#ap-note').value});audit(pid,'Đặt lịch '+vnDate(date)+' '+hm(start)+', '+chairName(cid))}
+      if(editId){const a=A(editId);Object.assign(a,{did,cid,date,start,dur,sid});const nv=$('#ap-note').value.trim();if(!a.walkin&&nv!==(a.note||'')){audit(pid,nv?'Đổi nội dung hẹn: '+nv:'Xóa nội dung hẹn');a.note=nv}audit(pid,'Đổi lịch sang '+vnDate(date)+' '+hm(start)+', '+chairName(cid))}
+      else{addAppt({pid,did,cid,date,start,dur,sid,status:'dat',note:$('#ap-note').value.trim()});audit(pid,'Đặt lịch '+vnDate(date)+' '+hm(start)+', '+chairName(cid))}
       if(UI.recall&&UI.recall.pid===pid&&!editId){const p=P(pid);p.recallDue=date;p.recallReason=UI.recall.why;UI.recall=null}
       closeModal();UI.calDate=date;toast(`${editId?'Đã đổi lịch':'Đã đặt lịch'} ${hm(start)} ${vnDate(date)}, ${chairName(cid)}, cho ${P(pid).name}`);render();break;}
     case 'appt':apptMenu(A(id));break;
@@ -1851,7 +1998,7 @@ document.addEventListener('click',e=>{
     case 'noshow':{const a=A(id),prev=a.status;a.status='khongden';audit(a.pid,'Ghi không đến');closeModal();toast(`Đã ghi ${P(a.pid).name} không đến`,false,{act:'undo-noshow',id:a.id,prev});render();break;}
     case 'undo-noshow':{const a=A(id);if(a&&a.status==='khongden'){a.status=t.dataset.prev||'xacnhan';audit(a.pid,'Hoàn tác ghi không đến');toast(`Đã hoàn tác, ${P(a.pid).name} trở lại danh sách`);render()}break;}
     case 'restore':{const a=A(id),c=conflict(a.did,a.date,a.start,a.dur,a.id)||chairConflict(a.cid,a.date,a.start,a.dur,a.id);if(c){toast('Giờ cũ đã có lịch khác. Dùng Đổi lịch.',true);return}a.status='xacnhan';audit(a.pid,'Khôi phục lịch');closeModal();toast('Đã khôi phục lịch');render();break;}
-    case 'resched':{const a=A(id);closeModal();apptForm({editId:a.id,pid:a.pid,did:a.did,cid:a.cid,date:a.date,start:a.start,sid:a.sid});break;}
+    case 'resched':{const a=A(id);closeModal();apptForm({editId:a.id,pid:a.pid,did:a.did,cid:a.cid,date:a.date,start:a.start,sid:a.sid,note:a.walkin?'':a.note});break;}
     case 'cancel':{const a=A(id);const w=a.status==='den';a.status='huy';audit(a.pid,w?'Khách bỏ về khi đang chờ':'Hủy lịch');closeModal();toast(w?'Đã ghi khách bỏ về':'Đã hủy lịch');}render();break;
     case 'walkin':{const pid=t.dataset.pid;modal(`<h3>Tiếp nhận vào hàng chờ</h3><p style="margin:0">Chọn bác sĩ khám cho ${esc(P(pid).name)}:</p><footer style="justify-content:flex-start">${DOCTORS.map(d=>{const q=D.appts.filter(a=>a.date===TODAY&&a.did===d.id&&a.status==='den').length;return `<button class="btn" data-act="walkin-ok" data-pid="${pid}" data-did="${d.id}">${d.name}, ${q} đang chờ</button>`}).join('')}</footer>`);break;}
     case 'walkin-ok':{const it=t.dataset.intake&&D.intake.find(x=>x.id===t.dataset.intake);addWalkin(t.dataset.pid,t.dataset.did,it?'Quét mã QR':'Tại quầy');if(it){it.status='xong';it.did=t.dataset.did}audit(t.dataset.pid,'Vào hàng chờ vãng lai của '+docName(t.dataset.did)+' (không xếp vào lịch)');closeModal();toast('Đã đưa khách vào hàng chờ');render();break;}
@@ -1989,6 +2136,7 @@ document.addEventListener('click',e=>{const c=e.target.closest('.cal .col');if(!
   const y=e.clientY-c.getBoundingClientRect().top;const start=DAY0+Math.floor(y/SLOTPX)*SLOT;apptForm(c.dataset.by==='bs'?{did:c.dataset.k,date:UI.calDate,start}:{cid:c.dataset.k,did:Object.keys(HOME_CHAIR).find(k=>HOME_CHAIR[k]===c.dataset.k),date:UI.calDate,start})});
 
 load();render();
+(()=>{const h=$('header.top'),n=$('nav.side');const f=()=>{document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');document.documentElement.style.setProperty('--nh',n.offsetHeight+'px')};f();try{new ResizeObserver(f).observe(h);new ResizeObserver(f).observe(n)}catch(_){addEventListener('resize',f)}})();
 if(SIMAUTO)setTimeout(()=>toast('Đang ngoài giờ làm việc nên bản chạy thử xem như lúc 09:45. Đổi ở mục Giờ thử.'),300);
 /* Thu gọn đầu trang khi cuộn xuống trên điện thoại; mở lại khi cuộn lên rõ ràng hoặc về đầu trang */
 let lastY=0,upAcc=0;addEventListener('scroll',()=>{const y=scrollY,h=$('header.top');if(!h)return;const d=y-lastY;lastY=y;
