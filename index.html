@@ -978,6 +978,79 @@ body{min-height:100vh}
   .nk-clinic{overflow:hidden;text-overflow:ellipsis}
 }
 .sec-late .row.ap>.pill,.sec-late .pill-m{display:none}
+/* Dị ứng khách tự khai: chữ nhẹ hơn trong khung đỏ; bác sĩ xác nhận từng dòng */
+.alg-self{font-weight:500}
+.alg-conf{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.alg-c{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;font-size:14px}
+.alg-c .acts{display:flex;gap:6px;flex-wrap:wrap}
+/* Quản lý: mức giảm giá cần duyệt */
+.dc-form{display:grid;grid-template-columns:repeat(2,minmax(0,220px)) auto;gap:10px 14px;align-items:end;justify-content:start;padding-top:8px}
+.dc-now{margin:6px 0 0;font-size:13.5px;color:var(--printed)}
+@media (max-width:600px){.dc-form{grid-template-columns:1fr}}
+/* Nhãn dị ứng dài trong dòng khách: xuống dòng trong nhãn, không cắt chữ */
+.nm .alg,.pt-name .alg{white-space:normal;line-height:1.3;text-align:left}
+/* Danh sách gọi khách (Tư vấn, Chăm sóc): cột thẳng hàng, số tiền và số ngày đọc lướt được */
+.rc-list{display:flex;flex-direction:column;container-type:inline-size}
+.rc-row{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(110px,.6fr) minmax(120px,.7fr) minmax(150px,.8fr) minmax(150px,.9fr) 196px;gap:4px 16px;align-items:center;padding:9px 0;border-top:1px solid var(--rule)}
+.rc-row:first-child,.rc-h+.rc-row{border-top:0}
+.rc-h{padding:0 0 6px;border-bottom:1px solid var(--rule);font-size:12.5px;font-weight:600;color:var(--printed)}
+.rc-list:not(.tv) .rc-row{grid-template-columns:minmax(0,1.9fr) minmax(120px,.6fr) minmax(160px,.8fr) minmax(170px,.9fr) 196px}
+.rc-main .nm{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px}
+.rc-main{min-width:0}
+.rc-main .sub{font-size:13.5px;color:var(--printed);line-height:1.4}
+.rc-k,.rc-k2{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.rc-k b,.rc-k2 b{font-size:14.5px;font-weight:700;color:var(--ink);white-space:nowrap}
+.rc-k b.todo,.rc-k2 b.todo{color:var(--todo)}
+.rc-k small,.rc-k2 small{font-size:12.5px;color:var(--printed)}
+.rc-k.num{align-items:flex-end;text-align:right}
+.rc-h>span:nth-child(2){text-align:left}
+.rc-list.tv .rc-h>span:nth-child(2){text-align:right}
+.ct{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.ct .ph{font-size:14px;color:var(--ink);font-weight:500}
+.ct-ok{font-size:12.5px;color:var(--printed)}
+.ct-no{align-self:flex-start;font-size:12px;font-weight:700;color:var(--todo);border:1px solid currentColor;border-radius:6px;padding:0 6px;margin-top:2px;white-space:nowrap}
+.lc{display:flex;flex-direction:column;line-height:1.3;font-size:13.5px;min-width:0}
+.lc small{font-size:12px;color:var(--printed)}
+.lc.none span{color:var(--printed)}
+.rc-act{display:flex;gap:4px;justify-content:flex-end}
+.rc-act .btn{border-color:transparent;background:none;color:var(--brand)}
+@media (hover:hover){.rc-row:not(.rc-h):hover{background:var(--grey)}.rc-row:hover .rc-act .btn{border-color:var(--brand-line);background:var(--paper)}}
+.rc-act .btn:focus-visible{border-color:var(--brand)}
+.tv-sec>header{flex-wrap:wrap}
+.tv-sec>header small{margin-right:auto;margin-left:10px}
+.tv-sort .btn{min-height:30px;font-size:13px}
+.tv-sec+.tv-sec{margin-top:12px}
+.more-l{align-self:flex-start;padding-inline:0;margin-top:6px;color:var(--brand)}
+/* Hẹp (nửa màn hình, điện thoại): mỗi khách một khối, nút bên phải tên */
+@container (max-width:860px){
+  .rc-h{display:none}
+  .rc-row,.rc-list:not(.tv) .rc-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"m a" "k k" "c c" "l l";row-gap:3px}
+  .rc-main{grid-area:m}.rc-act{grid-area:a;align-self:start}
+  .rc-k{grid-area:k;flex-direction:row;flex-wrap:wrap;gap:0 8px;align-items:baseline}
+  .rc-k.num{align-items:baseline;text-align:left}
+  .rc-list.tv .rc-k{grid-area:k}
+  .rc-list.tv .rc-row{grid-template-areas:"m a" "k k" "d d" "c c" "l l"}
+  .rc-k2{grid-area:d;flex-direction:row;flex-wrap:wrap;gap:0 8px;align-items:baseline}
+  .ct{grid-area:c;flex-direction:row;flex-wrap:wrap;gap:2px 10px;align-items:center}
+  .ct-no{margin-top:0}
+  .lc{grid-area:l;flex-direction:row;flex-wrap:wrap;gap:0 8px;align-items:baseline}
+  .lc::before{content:"Lần gọi gần nhất:";color:var(--printed);font-size:12.5px}
+}
+@container (max-width:420px){
+  .rc-row,.rc-list:not(.tv) .rc-row,.rc-list.tv .rc-row{grid-template-columns:minmax(0,1fr);grid-template-areas:"m" "k" "d" "c" "l" "a"}
+  .rc-list:not(.tv) .rc-row{grid-template-areas:"m" "k" "c" "l" "a"}
+  .rc-act{justify-content:flex-start;margin-left:-12px}
+}
+@media (max-width:820px){.tv-sort{width:100%;display:grid;grid-template-columns:1fr 1fr}.tv-sec>header small{margin-left:0;flex-basis:100%}}
+/* Thu ngân, Hôm nay */
+.ledger tr.tot td{border-top:2px solid var(--brand);border-bottom:0;font-weight:700}
+.ledger .nil{color:var(--printed);opacity:.55;font-weight:600}
+.side-note{margin:6px 0 0;font-size:13px;color:var(--printed)}
+/* Bác sĩ, Hôm nay */
+.next-card{display:grid;grid-template-columns:minmax(0,720px) auto;gap:12px 24px;align-items:start;justify-content:space-between}
+.next-go{display:flex;justify-content:flex-end}
+.doc-rest .pill.s-xacnhan{display:none}
+@media (max-width:820px){.next-card{grid-template-columns:1fr}.next-go .btn{width:100%}}
 
 </style>
 
@@ -1274,6 +1347,7 @@ function seedData(){
   }
   {const a0=D.appts.find(a=>a.did==='d1'&&a.status==='den');if(a0)Object.assign(D.patients.find(p=>p.id===a0.pid).teeth,{17:'sau',25:'sau',26:'tram',36:'su',46:'tuy',48:'nho'})}
   D.sampleV=19;
+  {const a0=D.appts.find(a=>a.did==='d1'&&a.status==='den');if(a0){const p=D.patients.find(x=>x.id===a0.pid),v='Nổi mẩn khi uống thuốc kháng sinh, không nhớ tên';p.allergies.push(v);p.algPend=[v]}}
   D.hist=histSeed();
   [[540,'d1','tram'],[600,'d2','caovoi'],[840,'d3','su'],[900,'d1','kham']].forEach(([start,did,sid])=>{const p=nextP();D.appts.push({id:'a'+(D.seq++),pid:p.id,did,cid:HOME_CHAIR[did],date:addDays(TODAY,1),start,dur:svc(sid).dur,sid,status:'xacnhan',note:'',arrivedAt:null})});
   // nợ cũ
@@ -1283,6 +1357,8 @@ function seedData(){
     const ab=p.allergies.some(x=>norm(x)==='penicillin')?'clinda':'amox';
     const rx={id:'r'+(D.seq++),code:FACILITY.code+String(D.seq++).padStart(7,'0')+'-c',pid:p.id,did:a.did,date:TODAY,at:hm(a.start+40),dx:['K04.0'],lines:[{drug:ab,qty:15,usage:'Mẫu: theo chỉ định của bác sĩ'},{drug:'para',qty:10,usage:'Mẫu: theo chỉ định của bác sĩ'}],override:'',status:k===1?'guiloi':'dagui',error:k===1?'Thiếu địa chỉ (dia_chi)':'',log:[]};
     rx.log.push(rx.at+(k===1?' Gửi lỗi (giả lập): '+rx.error:' Gửi thành công (giả lập), nhận mã đơn '+rx.code));D.rx.push(rx)});
+  D.patients.filter(p=>p.plan.length).forEach((p,i)=>{if(i%3===0)(p.calls=p.calls||[]).push({at:vnDate(addDays(TODAY,-(i+2)))+' 10:15',res:['Không nghe máy','Khách bận, gọi lại sau','Khách hẹn sẽ đến'][(i/3)%3],by:'Phạm Ngọc Ánh'})});
+  D.patients.filter(p=>p.recallDue&&p.recallDue<TODAY).forEach((p,i)=>{if(i%2===1)(p.calls=p.calls||[]).push({at:vnDate(addDays(TODAY,-i))+' 15:40',res:i%4===1?'Không nghe máy':'Khách bận, gọi lại sau',by:'Nguyễn Thu Hà'})});
   return D;
 }
 
@@ -1323,12 +1399,16 @@ const pill=s=>`<span class="pill s-${s}">${ST[s]}</span>`;
 const ALG_I='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 22 20H2z" fill="currentColor"/><path d="M12 9v5M12 16.6v.4" stroke="#B42318" stroke-width="2.4" stroke-linecap="round"/></svg>';
 const algTag=(p,short)=>p&&p.allergies&&p.allergies.length?`<span class="alg" title="Dị ứng: ${esc(p.allergies.join(', '))}">${ALG_I}${short?'Dị ứng':'Dị ứng: '+esc(p.allergies.join(', '))}</span>`:'';
 const nw=t=>`<span class="nw">${t}</span>`;
+const algPend=p=>p.algPend||[];
+const algTxt=p=>p.allergies.map(x=>esc(x)+(algPend(p).includes(x)?' <span class="alg-self">(khách tự khai, chờ bác sĩ xác nhận)</span>':'')).join(', ');
+const algConfirm=p=>UI.role==='bacsi'&&algPend(p).length?`<div class="alg-conf">${algPend(p).map(x=>`<div class="alg-c"><span>Xác nhận dị ứng khách tự khai: <b>${esc(x)}</b></span><span class="acts"><button class="btn sm" data-act="alg-ok" data-id="${p.id}" data-v="${esc(x)}">Đúng, xác nhận</button><button class="btn sm ghost" data-act="alg-no" data-id="${p.id}" data-v="${esc(x)}">Không đúng, bỏ</button></span></div>`).join('')}</div>`:'';
 const overTxt=n=>n<=0?'đến hạn hôm nay':n<45?'quá hạn '+n+' ngày':'quá hạn '+Math.round(n/30)+' tháng';
 const dur=m=>{m=Math.round(m);if(m<60)return m+' phút';const g=Math.floor(m/60),p=m%60;return g+' giờ'+(p?' '+p+' phút':'')};
 const LATE=15; /* quá giờ hẹn hơn 15 phút mà chưa đến thì vào nhóm Quá giờ */
 const tn=t=>String(t).replace(/\d/g,d=>`<span class="dg">${d}</span>`);
 
-const needApprove=b=>b.discount>500000||(b.total>0&&b.discount>=b.total*0.5);
+const DCFG=()=>D.discCfg||(D.discCfg={pct:10,amt:1000000});
+const needApprove=b=>{const c=DCFG();return b.discount>c.amt||(b.total>0&&b.discount>b.total*c.pct/100)};
 const remain=b=>Math.max(0,b.total-b.discount-b.paid);
 
 /* ---------- Quyền và menu ---------- */
@@ -1373,7 +1453,7 @@ function renderNav(){
   const dot=(n,t)=>n?`<span class="cnt" title="${t||n+' việc chờ'}" aria-label="${t||n+' việc chờ'}">${n}</span>`:'';
   const intakeN=D.intake.filter(x=>x.status==='cho').length,waitN=D.appts.filter(a=>a.date===TODAY&&a.status==='den').length;
   const tip={today:`${waitN} khách đang chờ khám${intakeN?`, ${intakeN} phiếu QR cần xử lý`:''}`,thungan:`${c.thungan} khách chờ thu tiền`,kham:`${c.kham} khách chờ khám`};
-  const items=NAV.filter(n=>n.roles.includes(UI.role));
+  const items=NAV.filter(n=>n.roles.includes(UI.role)).map(n=>n.id==='today'&&UI.role==='chu'?Object.assign({},n,{label:'Báo cáo',short:'Báo cáo'}):n);
   const nMob=mob.length;
   $('#nav').style.setProperty('--n',nMob);
   // Thứ tự trên điện thoại theo MOBILE; trên máy tính hiện đủ mục
@@ -1450,7 +1530,7 @@ function vToday(){
     <section class="panel"><header><h3>Tình trạng ghế</h3><small>${clock()}</small></header><div class="chairs">${chairs}</div></section>
     ${sec('Đang khám',inChair.length,'',inChair.map(a=>apptRow(a)).join('')||'<div class="empty">Chưa có khách đang khám.</div>','sec-kham')}
     ${sec('Chờ thu tiền',toPay.length,'đã khám xong, chưa thanh toán',toPay.map(b=>{const p=P(b.pid);return `<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(b.items.map(i=>i.name).join(', ')))}, ${nw(docName(b.did))}</div></div></div>`}).join('')||'<div class="empty">Không có khách chờ thu tiền.</div>','sec-pay')}
-    ${sec('Hẹn tái khám',recall.length,'đến hạn hoặc quá hạn, chưa có lịch',recall.slice(0,5).map(p=>`<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(p.recallReason))}, ${nw('đến hạn '+vnDate(p.recallDue))}</div></div><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button></div>`).join('')+(recall.length>5?`<button class="btn sm ghost" data-act="nav" data-v="chamsoc">Xem cả ${recall.length} khách</button>`:'')||'<div class="empty">Không có khách đến hạn tái khám.</div>','sec-recall')}
+    ${sec('Hẹn tái khám',recall.length,'đến hạn hoặc quá hạn, chưa có lịch',recall.slice(0,5).map(p=>`<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(p.recallReason))}, ${nw(p.recallDue<TODAY?overTxt(daysBetween(p.recallDue,TODAY))+', hạn '+vnDate(p.recallDue):'đến hạn '+vnDate(p.recallDue))}</div></div><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button></div>`).join('')+(recall.length>5?`<button class="btn sm ghost" data-act="nav" data-v="chamsoc">Xem cả ${recall.length} khách</button>`:'')||'<div class="empty">Không có khách đến hạn tái khám.</div>','sec-recall')}
     ${intakePanel()}
     </div></div>`;
   }
@@ -1459,26 +1539,39 @@ function vToday(){
     const q=mine.filter(a=>a.status==='den'), cur=mine.find(a=>a.status==='kham'), next=cur||q[0];
     const rest=mine.filter(a=>['dat','xacnhan'].includes(a.status));
     let card='<div class="empty">Chưa có khách chờ. Khi lễ tân bấm Khách đã đến, khách sẽ hiện ở đây.</div>';
-    if(next){const p=P(next.pid);card=`<div class="grid g2"><div class="stack"><div class="pt-name">${esc(p.name)}${algTag(p)}</div><div style="color:var(--muted)">${genTxt(p)}, ${ageTxt(p)}, ${p.code}, ${svc(next.sid).name}</div>
-      ${p.allergies.length?`<div class="alert red" style="margin-top:10px">Dị ứng: ${esc(p.allergies.join(', '))}</div>`:''}${p.conditions.length?`<div class="alert amber" style="margin-top:8px">Bệnh nền: ${esc(p.conditions.join(', '))}</div>`:''}
+    if(next){const p=P(next.pid);card=`<div class="next-card"><div class="stack"><div class="pt-name">${esc(p.name)}</div><div style="color:var(--muted)">${genTxt(p)}, ${ageTxt(p)}, ${p.code}, ${svc(next.sid).name}</div>${next.note&&!next.walkin?`<div class="ap-note">${esc(next.note)}</div>`:''}
+      ${p.allergies.length?`<div class="alert red" style="margin-top:10px"><span>Dị ứng: ${algTxt(p)}</span></div>${algConfirm(p)}`:''}${p.conditions.length?`<div class="alert amber" style="margin-top:8px">Bệnh nền: ${esc(p.conditions.join(', '))}</div>`:''}
       ${p.history[0]?`<p style="font-size:14px;color:var(--muted)">Lần trước ${vnDate(p.history[0].date)}: ${esc(p.history[0].services.join(', '))}</p>`:'<p style="font-size:14px;color:var(--muted)">Khách mới, chưa có lịch sử điều trị.</p>'}</div>
-      <div style="display:flex;align-items:flex-end;justify-content:flex-end"><button class="btn primary big" data-act="start-exam" data-id="${next.id}">${cur?'Tiếp tục khám':'Bắt đầu khám'}</button></div></div>`}
+      <div class="next-go"><button class="btn primary big" data-act="start-exam" data-id="${next.id}">${cur?'Tiếp tục khám':'Bắt đầu khám'}</button></div></div>`}
     return head('Việc hôm nay',`${date}, ${esc(me().name)} có ${mine.filter(a=>a.status!=='huy').length} lịch`)+rxAlert()
       +`<section class="panel"><header><h3>${cur?'Đang khám':'Khách tiếp theo'}</h3><small>${q.length} khách đang chờ</small></header>${card}</section>
-      <div class="grid g2"><section class="panel"><header><h3>Hàng chờ của bạn</h3></header><div class="list">${q.map(a=>apptRow(a,`<button class="btn sm" data-act="start-exam" data-id="${a.id}">Khám</button>`)).join('')||'<div class="empty">Trống.</div>'}</div></section>
-      <section class="panel"><header><h3>Lịch còn lại hôm nay</h3></header><div class="list">${rest.map(a=>apptRow(a)).join('')||'<div class="empty">Không còn lịch.</div>'}</div></section></div>`;
+      <div class="grid g2"><section class="panel sec-wait doc-q"><header><h3>Hàng chờ của bạn</h3></header><div class="list">${q.map(a=>apptRow(a,`<button class="btn sm" data-act="start-exam" data-id="${a.id}">Khám</button>`)).join('')||'<div class="empty">Trống.</div>'}</div></section>
+      <section class="panel doc-rest"><header><h3>Lịch còn lại hôm nay</h3></header><div class="list">${rest.map(a=>apptRow(a)).join('')||'<div class="empty">Không còn lịch.</div>'}</div></section></div>`;
   }
   if(r==='thungan'){
     const wait=D.bills.filter(b=>b.status==='cho'), pay=D.payments.filter(x=>x.date===TODAY), tot=pay.reduce((t,x)=>t+x.amount,0);
-    return head('Việc hôm nay',date,`<button class="btn" data-act="nav" data-v="thungan">Mở Thu ngân</button>`)
-    +`<section class="panel"><header><h3>Sổ thu hôm nay</h3></header><table class="ledger"><tbody><tr><td>Đã thu<small>${pay.length} phiếu thu</small></td><td>${money(tot)}</td></tr><tr><td>Chờ thanh toán<small>khách đã khám xong, chưa trả</small></td><td>${wait.length} khách</td></tr></tbody></table></section>
-    <section class="panel"><header><h3>Danh sách chờ thanh toán</h3></header><div class="list">${wait.map(billRow).join('')||'<div class="empty">Không có khách chờ thanh toán.</div>'}</div></section>`;
+    const by={tienmat:0,chuyenkhoan:0,the:0};pay.forEach(x=>by[x.method]=(by[x.method]||0)+x.amount);
+    const debt=D.bills.filter(x=>x.status==='no').sort((a,b)=>a.date.localeCompare(b.date)), dsum=debt.reduce((t,x)=>t+remain(x),0), wsum=wait.reduce((t,b)=>t+remain(b),0);
+    const dRow=x=>{const q=P(x.pid),n=daysBetween(x.date,TODAY);return `<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${q.id}">${esc(q.name)}</button>${algTag(q)}</div><div class="sub">${nw(esc(x.items.map(i=>i.name).join(', ')))}, ${nw('từ '+vnDate(x.date)+(n>=30?', <span class="todo">'+n+' ngày</span>':''))}</div></div><b class="amt">${money(remain(x))}</b><button class="btn sm" data-act="open-bill" data-id="${x.id}">Thu nợ</button></div>`};
+    return head('Việc hôm nay',`${date}, ${clock()}`)
+    +`<div class="flow"><div class="flow-main">
+    <section class="panel"><header><h3>Chờ thanh toán <span class="n">${wait.length}</span></h3><small>${wait.length?money(wsum)+', khách đã khám xong':'khách khám xong sẽ hiện ở đây'}</small></header><div class="list">${wait.map(billRow).join('')||'<div class="empty">Không có khách chờ thanh toán.</div>'}</div></section>
+    <section class="panel"><header><h3>Khách còn nợ <span class="n">${debt.length}</span></h3><small>${money(dsum)}, nợ lâu nhất ở trên</small></header><div class="list">${debt.slice(0,5).map(dRow).join('')||'<div class="empty">Không có khách nợ.</div>'}${debt.length>5?`<button class="btn sm ghost more-l" data-act="nav" data-v="thungan">Xem cả ${debt.length} khách ở Thu ngân</button>`:''}</div></section>
+    </div><div class="flow-side">
+    <section class="panel"><header><h3>Sổ thu hôm nay</h3><small>${pay.length} phiếu thu</small></header><table class="ledger"><tbody>${Object.keys(METHOD).map(k=>`<tr><td>${METHOD[k]}</td><td>${by[k]?money(by[k]):'<span class="nil" aria-label="Chưa có">–</span>'}</td></tr>`).join('')}<tr class="tot"><td>Đã thu</td><td>${money(tot)}</td></tr></tbody></table><p class="side-note">Cuối ca đếm tiền trong két và so với dòng Tiền mặt ở trang Thu ngân.</p></section>
+    </div></div>`;
   }
   if(r==='tuvan'){
-    const pend=D.patients.filter(p=>p.plan.length), over=D.patients.filter(p=>p.recallDue&&p.recallDue<TODAY&&!hasUpcoming(p)).sort((a,b)=>a.recallDue.localeCompare(b.recallDue));
+    const val=p=>p.plan.reduce((t,it)=>t+svc(it.sid).price,0), since=p=>daysBetween(p.plan[0].at,TODAY);
+    const srt=UI.tvSort==='val'?(a,b)=>val(b)-val(a)||since(b)-since(a):(a,b)=>since(b)-since(a)||val(b)-val(a);
+    const pend=D.patients.filter(p=>!p.deleted&&p.plan.length&&!hasUpcoming(p)).sort(srt), inPend=new Set(pend.map(p=>p.id));
+    const overAll=D.patients.filter(p=>!p.deleted&&p.recallDue&&p.recallDue<TODAY&&!hasUpcoming(p)).sort((a,b)=>a.recallDue.localeCompare(b.recallDue));
+    const over=overAll.filter(p=>!inPend.has(p.id)), dup=overAll.length-over.length, sum=pend.reduce((t,p)=>t+val(p),0);
+    const pRow=p=>{const it=p.plan[0],s=svc(it.sid),n=since(p),more=p.plan.length-1,ov=inPend.has(p.id)&&p.recallDue&&p.recallDue<TODAY&&!hasUpcoming(p);
+      return `<div class="rc-row"><div class="rc-main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${s.name}${it.tooth?' răng '+it.tooth:''}${more>0?`, thêm ${more} mục`:''}${ov?`, <span class="nw todo">kèm quá hạn tái khám ${overTxt(daysBetween(p.recallDue,TODAY)).replace('quá hạn ','')}</span>`:''}</div></div><div class="rc-k num"><b>${money(val(p))}</b></div><div class="rc-k2"><b class="${n>=30?'todo':''}">${n<=0?'Hôm nay':n+' ngày trước'}</b><small>tư vấn ${vnDate(it.at)}</small></div>${ctCell(p)}${lastCall(p)}<div class="rc-act"><button class="btn sm" data-act="call-log" data-id="${p.id}">Ghi cuộc gọi</button><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="${it.sid}">Đặt lịch</button></div></div>`};
     return head('Việc hôm nay',date,`<button class="btn primary" data-act="new-appt">+ Thêm lịch</button>`)
-    +`<div class="grid g2"><section class="panel"><header><h3>Đã tư vấn, chưa làm</h3><small>${pend.length} khách</small></header><div class="list">${pend.map(p=>{const it=p.plan[0],s=svc(it.sid);return `<div class="row"><div class="main"><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button><div>${s.name}${it.tooth?' răng '+it.tooth:''}, ${money(s.price)}, tư vấn ${vnDate(it.at)}</div></div><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="${it.sid}">Đặt lịch</button></div>`}).join('')||'<div class="empty">Không có.</div>'}</div></section>
-    <section class="panel"><header><h3>Quá hạn tái khám</h3><small>${over.length} khách</small></header><div class="list">${over.slice(0,10).map(recallRow).join('')}</div>${over.length>10?`<button class="btn sm" data-act="nav" data-v="chamsoc">Xem cả ${over.length} khách</button>`:''}</section></div>`;
+    +`<section class="panel tv-sec"><header><h3>Đã tư vấn, chưa làm <span class="n">${pend.length}</span></h3><small>tổng ${money(sum)} chưa làm, không tính khách đã có lịch hẹn</small><div class="seg tv-sort" role="group" aria-label="Xếp theo"><button class="btn sm" data-act="tv-sort" data-v="old" aria-pressed="${UI.tvSort!=='val'}">Tư vấn lâu nhất</button><button class="btn sm" data-act="tv-sort" data-v="val" aria-pressed="${UI.tvSort==='val'}">Giá trị lớn nhất</button></div></header><div class="rc-list tv">${rcHead('Giá trị','Đã tư vấn')}${pend.map(pRow).join('')||'<div class="empty">Không có khách đã tư vấn mà chưa làm.</div>'}</div></section>
+    <section class="panel tv-sec"><header><h3>Quá hạn tái khám <span class="n">${over.length}</span></h3><small>quá hạn lâu nhất ở trên${dup?`, không tính ${dup} khách đã có ở danh sách trên`:''}</small></header><div class="rc-list">${rcHead('Quá hạn','')}${over.slice(0,10).map(recallRow).join('')||'<div class="empty">Không có khách quá hạn tái khám.</div>'}</div>${over.length>10?`<button class="btn sm ghost more-l" data-act="nav" data-v="chamsoc">Xem cả ${over.length} khách ở Chăm sóc khách</button>`:''}</section>`;
   }
   return vReport(todays,head,date);
 }
@@ -1584,7 +1677,11 @@ function qrSubmit(){
 }
 function newPatientFromIntake(it){const p={id:'p'+(D.seq++),code:'KH'+String(2401+D.patients.length).padStart(5,'0'),name:it.name,phone:it.phone,gender:it.gender,dob:it.dob,address:it.address,guardian:it.guardian,source:'Quét mã QR tại quầy',group:'Khách mới',allergies:[],conditions:[],selfReport:it.health||'',consentData:{at:TODAY,how:'Khách tích đồng ý trên trang mã QR lúc '+it.at},consentMsg:false,cccd:'',teeth:{},history:[],plan:[],recallDue:null,recallReason:''};
   D.patients.push(p);it.pid=p.id;audit(p.id,'Tạo hồ sơ từ mã QR');return p}
-function recallRow(p){const late=daysBetween(p.recallDue,TODAY);return `<div class="row"><div class="main"><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}<div>${esc(p.recallReason)}, đến hạn ${vnDate(p.recallDue)}, ${overTxt(late)}${p.consentMsg?'':', chưa đồng ý nhận tin'}</div></div><span style="font-size:13px;color:var(--muted)">${p.phone}</span><button class="btn sm" data-act="call-log" data-id="${p.id}">Ghi cuộc gọi</button><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button>${p.calls&&p.calls.length?`<div style="flex:1 0 100%;font-size:12px;color:var(--muted)">Lần gọi gần nhất ${p.calls[0].at}: ${esc(p.calls[0].res)}</div>`:''}</div>`}
+const ctCell=p=>`<div class="ct"><span class="ph">${p.phone}</span>${p.consentMsg?'<span class="ct-ok">Được nhắn tin nhắc</span>':'<span class="ct-no">Chỉ gọi, không nhắn tin</span>'}</div>`;
+const lastCall=p=>p.calls&&p.calls.length?`<div class="lc"><span>${esc(p.calls[0].res)}</span><small>${p.calls[0].at.replace('/'+TODAY.slice(0,4),'')}, ${esc(p.calls[0].by.split(' ').slice(-2).join(' '))}</small></div>`:'<div class="lc none"><span>Chưa gọi</span></div>';
+const rcHead=(a,b)=>`<div class="rc-row rc-h" aria-hidden="true"><span>Khách</span><span>${a}</span>${b?`<span>${b}</span>`:''}<span>Liên hệ</span><span>Lần gọi gần nhất</span><span></span></div>`;
+function recallRow(p){const late=daysBetween(p.recallDue,TODAY);return `<div class="rc-row"><div class="rc-main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${esc(p.recallReason)}</div></div><div class="rc-k"><b class="${late>=30?'todo':''}">${late<=0?'Đến hạn hôm nay':'Quá hạn '+overTxt(late).replace('quá hạn ','')}</b><small>hạn ${vnDate(p.recallDue)}</small></div>${ctCell(p)}${lastCall(p)}<div class="rc-act"><button class="btn sm" data-act="call-log" data-id="${p.id}">Ghi cuộc gọi</button><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button></div></div>`}
+function recallRowOld(p){const late=daysBetween(p.recallDue,TODAY);return `<div class="row"><div class="main"><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}<div>${esc(p.recallReason)}, đến hạn ${vnDate(p.recallDue)}, ${overTxt(late)}${p.consentMsg?'':', chưa đồng ý nhận tin'}</div></div><span style="font-size:13px;color:var(--muted)">${p.phone}</span><button class="btn sm" data-act="call-log" data-id="${p.id}">Ghi cuộc gọi</button><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button>${p.calls&&p.calls.length?`<div style="flex:1 0 100%;font-size:12px;color:var(--muted)">Lần gọi gần nhất ${p.calls[0].at}: ${esc(p.calls[0].res)}</div>`:''}</div>`}
 
 /* ---------- Lịch hẹn ---------- */
 const DAY0=8*60, DAY1=19*60, SLOT=30, SLOTPX=matchMedia('(max-width:820px)').matches?48:44;
@@ -1667,12 +1764,12 @@ function vHoso(){
   const logs=D.audit.filter(x=>x.pid===p.id).slice(0,8);
   return `<div class="head"><div><button class="btn sm ghost" data-act="nav" data-v="khach">‹ Danh sách khách</button><h2 class="pt-name" style="margin-top:4px">${esc(p.name)}${algTag(p)}</h2><p>${p.code}, ${genTxt(p)}, ${ageTxt(p)}, ${p.phone}, ${p.group}, nguồn ${p.source}</p></div>
   <div class="actions">${can.editAppt()?`<button class="btn primary" data-act="new-appt" data-pid="${p.id}">Đặt lịch</button>`:''}${['letan','chu'].includes(UI.role)&&!inQueue?`<button class="btn" data-act="walkin" data-pid="${p.id}">Tiếp nhận vào hàng chờ</button>`:''}${can.editPatient()?`<button class="btn" data-act="edit-p" data-id="${p.id}">Sửa hồ sơ</button>`:''}</div></div>
-  ${p.allergies.length?`<div class="alert red">Dị ứng: ${esc(p.allergies.join(', '))}</div>`:''}${p.conditions.length?`<div class="alert amber">Bệnh nền: ${esc(p.conditions.join(', '))}</div>`:''}${p.selfReport?`<div class="alert amber">Khách tự khai khi quét mã: ${esc(p.selfReport)}</div>`:''}
+  ${p.allergies.length?`<div class="alert red"><span>Dị ứng: ${algTxt(p)}</span></div>${algConfirm(p)}`:''}${p.conditions.length?`<div class="alert amber">Bệnh nền: ${esc(p.conditions.join(', '))}</div>`:''}${p.selfReport?`<div class="alert amber">Khách tự khai khi quét mã: ${esc(p.selfReport)}</div>`:''}
   ${can.editHealth()?`<div class="actions"><button class="btn sm" data-act="add-health" data-k="allergies" data-id="${p.id}">+ Thêm dị ứng</button><button class="btn sm" data-act="add-health" data-k="conditions" data-id="${p.id}">+ Thêm bệnh nền</button></div>`:''}
   <div class="grid g2">
    <section class="panel"><header><h3>Sơ đồ răng</h3><small>Ký hiệu FDI</small></header>${can.seeClinical()?teethView(p.teeth,false):'<div class="empty">Vai trò của bạn không xem được thông tin điều trị.</div>'}</section>
    <section class="panel"><header><h3>Lịch hẹn và nhắc</h3></header>
-    <div class="list">${appts.map(a=>`<div class="row"><span class="time">${hm(a.start)}</span><div class="main"><b>${vnDate(a.date)}</b><div>${svc(a.sid).name}, ${docName(a.did)}</div></div>${pill(a.status)}</div>`).join('')||'<div class="empty">Chưa có lịch hẹn sắp tới.</div>'}</div>
+    <div class="list">${appts.map(a=>`<div class="row"><span class="time">${hm(a.start)}</span><div class="main"><b>${vnDate(a.date)}</b><div>${svc(a.sid).name}, ${docName(a.did)}</div>${a.note&&!a.walkin?`<div class="ap-note">${esc(a.note)}</div>`:''}</div>${pill(a.status)}</div>`).join('')||'<div class="empty">Chưa có lịch hẹn sắp tới.</div>'}</div>
     ${p.recallDue?`<div class="alert ${p.recallDue<TODAY?'amber':'grey'}">Hẹn tái khám ${vnDate(p.recallDue)}: ${esc(p.recallReason)}</div>`:''}
     <dl class="kv"><dt>Đồng ý xử lý dữ liệu</dt><dd>${vnDate(p.consentData.at)}, ${esc(p.consentData.how)}</dd><dt>Đồng ý nhận tin nhắc</dt><dd>${p.consentMsg?'Có':'Chưa đồng ý, không gửi tin tự động'}</dd><dt>Địa chỉ</dt><dd>${p.address?esc(p.address):'<span style="color:var(--danger)">Chưa có, cần để kê đơn</span>'}</dd>${p.guardian?`<dt>Người giám hộ</dt><dd>${esc(p.guardian)}</dd>`:''}<dt>Mã định danh công dân</dt><dd>${showId(p.cccd)}</dd></dl></section>
   </div>
@@ -1762,7 +1859,7 @@ function vKham(){
   const p=P(a.pid),e=examOf(a.id);
   const planTotal=e.plan.reduce((t,it)=>t+svc(it.sid).price,0), today=e.plan.filter(it=>it.now);
   return `<div class="head"><div><h2 class="pt-name">${esc(p.name)}${algTag(p)}</h2><p>${p.code}, ${genTxt(p)}, ${ageTxt(p)}, hẹn ${hm(a.start)} ${svc(a.sid).name}</p><p class="draft" id="draftNote" aria-live="polite">${draftAt?'Đã lưu nháp lúc '+draftAt:'Tự lưu nháp khi gõ'}</p></div><div class="actions"><button class="btn" data-act="open-p" data-id="${p.id}">Hồ sơ đầy đủ</button><button class="btn primary" data-act="to-sign">Đến phần ký</button></div></div>
-  ${p.allergies.length?`<div class="alert red">Dị ứng: ${esc(p.allergies.join(', '))}</div>`:'<div class="alert grey">Chưa ghi nhận dị ứng. Hỏi lại khách trước khi dùng thuốc tê.</div>'}${p.conditions.length?`<div class="alert amber">Bệnh nền: ${esc(p.conditions.join(', '))}</div>`:''}${p.selfReport?`<div class="alert amber">Khách tự khai khi quét mã: ${esc(p.selfReport)}</div>`:''}
+  ${p.allergies.length?`<div class="alert red"><span>Dị ứng: ${algTxt(p)}</span></div>${algConfirm(p)}`:'<div class="alert grey">Chưa ghi nhận dị ứng. Hỏi lại khách trước khi dùng thuốc tê.</div>'}${p.conditions.length?`<div class="alert amber">Bệnh nền: ${esc(p.conditions.join(', '))}</div>`:''}${p.selfReport?`<div class="alert amber">Khách tự khai khi quét mã: ${esc(p.selfReport)}</div>`:''}
   <div class="actions"><button class="btn sm" data-act="add-health" data-k="allergies" data-id="${p.id}">+ Thêm dị ứng</button><button class="btn sm" data-act="add-health" data-k="conditions" data-id="${p.id}">+ Thêm bệnh nền</button><span style="font-size:12px;color:var(--muted);align-self:center">Mỗi lần thêm đều ghi nhật ký hồ sơ</span></div>
   <section class="panel"><header><h3>Sơ đồ răng</h3><small>${UI.tsel.length?'Đã chọn răng '+UI.tsel.join(', '):'Bấm răng để chọn'}</small></header>
     <div class="tgrid"><div class="tchart">${teethView(e.teeth,true,e.faces)}</div><div class="tside">${toothPanel(e)}
@@ -1794,7 +1891,7 @@ function vKham(){
 function discountBox(b){const r=b.discReq;
   if(r)return `<div class="alert amber" style="flex-wrap:wrap;align-items:center"><span style="flex:1 1 240px">Đang chờ chủ phòng khám duyệt giảm ${money(r.amount)}. Lý do: ${esc(r.reason)}. Người đề nghị: ${esc(r.by)} lúc ${r.at}.</span><span class="actions">${can.approveDiscount()?`<button class="btn sm primary" data-act="disc-approve" data-id="${b.id}">Duyệt</button><button class="btn sm" data-act="disc-reject" data-id="${b.id}">Từ chối</button>`:`<button class="btn sm" data-act="disc-cancel" data-id="${b.id}">Hủy đề nghị</button>`}</span></div>`;
   return `<div class="grid g2" style="gap:12px;align-items:end"><label class="f">Giảm giá (đồng)<input id="b-disc" type="number" min="0" step="10000" value="${UI.discDraft&&UI.discDraft.id===b.id?UI.discDraft.v:b.discount}"></label><label class="f">Lý do giảm<input id="b-disc-why" placeholder="Ví dụ: khách thân thiết" value="${esc(UI.discDraft&&UI.discDraft.id===b.id?UI.discDraft.why:'')}"></label></div>
-   <div class="actions" style="align-items:center"><button class="btn" data-act="disc-ok" data-id="${b.id}">Xác nhận giảm giá</button><span id="disc-prev" style="font-size:13px;color:var(--muted)">${b.discount?'Đang áp dụng giảm '+money(b.discount):'Chưa giảm giá'}. Giảm trên 500.000 đ hoặc từ một nửa hóa đơn cần chủ phòng khám duyệt.</span></div>`}
+   <div class="actions" style="align-items:center"><button class="btn" data-act="disc-ok" data-id="${b.id}">Xác nhận giảm giá</button><span id="disc-prev" style="font-size:13px;color:var(--muted)">${b.discount?'Đang áp dụng giảm '+money(b.discount):'Chưa giảm giá'}. Giảm trên ${money(DCFG().amt)} hoặc trên ${DCFG().pct}% hóa đơn cần chủ phòng khám duyệt.</span></div>`}
 function billRow(b){const p=P(b.pid);return `<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-bill" data-id="${b.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(b.items.map(i=>i.name).join(', ')))}, ${nw(docName(b.did))}</div></div>${can.collect()?`<b class="amt">${money(b.total-b.discount-b.paid)}</b>`:''}${can.collect()?`<button class="btn sm primary" data-act="open-bill" data-id="${b.id}">Thu tiền</button>`:''}</div>`}
 const METHOD={tienmat:'Tiền mặt',chuyenkhoan:'Chuyển khoản',the:'Thẻ'};
 function vThuNgan(){
@@ -1826,27 +1923,30 @@ function vThuNgan(){
 /* ---------- Chăm sóc khách, Quản lý ---------- */
 function vChamSoc(){
   const over=D.patients.filter(p=>p.recallDue&&p.recallDue<TODAY&&!hasUpcoming(p)).sort((a,b)=>a.recallDue.localeCompare(b.recallDue));
-  const soon=D.patients.filter(p=>p.recallDue&&p.recallDue>=TODAY&&daysBetween(TODAY,p.recallDue)<=14);
+  const soon=D.patients.filter(p=>p.recallDue&&p.recallDue>=TODAY&&daysBetween(TODAY,p.recallDue)<=14).sort((a,b)=>a.recallDue.localeCompare(b.recallDue));
   return `<div class="head"><div><h2>Chăm sóc khách</h2><p>Gọi điện và ghi kết quả từng cuộc. Tin Zalo cần tài khoản Zalo OA của phòng khám được duyệt.</p></div><span class="notlive">Chưa kết nối Zalo thật</span></div>
-  <div class="grid g2"><section class="panel"><header><h3>Quá hạn tái khám</h3><small>${over.length} khách</small></header><div class="list">${over.map(recallRow).join('')}</div></section>
-  <section class="panel"><header><h3>Đến hạn trong 14 ngày</h3><small>${soon.length} khách</small></header><div class="list">${soon.map(p=>`<div class="row"><div class="main"><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}<div>${esc(p.recallReason)}, đến hạn ${vnDate(p.recallDue)}</div></div></div>`).join('')||'<div class="empty">Không có.</div>'}</div></section></div>`;
+  <section class="panel"><header><h3>Quá hạn tái khám</h3><small>${over.length} khách, quá hạn lâu nhất ở trên</small></header><div class="rc-list">${rcHead('Quá hạn','')}${over.map(recallRow).join('')||'<div class="empty">Không có khách quá hạn.</div>'}</div></section>
+  <div class="grid g2">
+  <section class="panel"><header><h3>Đến hạn trong 14 ngày</h3><small>${soon.length} khách</small></header><div class="list">${soon.map(p=>`<div class="row"><div class="main"><button class="link" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}<div>${esc(p.recallReason)}, ${p.recallDue===TODAY?'đến hạn hôm nay':'đến hạn '+vnDate(p.recallDue)}</div></div></div>`).join('')||'<div class="empty">Không có.</div>'}</div></section></div>`;
 }
 const PERMS=[
   ['Xem số căn cước đầy đủ',{letan:0,bacsi:1,thungan:0,tuvan:0,chu:1}],
   ['Tạo và sửa hồ sơ khách',{letan:1,bacsi:0,thungan:0,tuvan:1,chu:1}],
-  ['Thêm dị ứng, bệnh nền',{letan:1,bacsi:1,thungan:0,tuvan:1,chu:1}],
+  ['Thêm dị ứng (ghi là khách tự khai), bệnh nền',{letan:1,bacsi:1,thungan:0,tuvan:1,chu:1}],
+  ['Xác nhận dị ứng khách tự khai',{letan:0,bacsi:1,thungan:0,tuvan:0,chu:0}],
   ['Đặt, đổi, hủy lịch hẹn',{letan:1,bacsi:0,thungan:0,tuvan:1,chu:1}],
   ['Khám, kê đơn, ký',{letan:0,bacsi:1,thungan:0,tuvan:0,chu:0}],
   ['Xem sơ đồ răng và lịch sử điều trị',{letan:0,bacsi:1,thungan:0,tuvan:1,chu:1}],
   ['Thu tiền',{letan:0,bacsi:0,thungan:1,tuvan:0,chu:1}],
-  ['Giảm giá nhỏ (đến 500.000 đ và dưới nửa hóa đơn)',{letan:0,bacsi:0,thungan:1,tuvan:0,chu:1}],
-  ['Duyệt giảm giá lớn',{letan:0,bacsi:0,thungan:0,tuvan:0,chu:1}],
+  ['Giảm giá trong mức cho phép (mức đặt ở Quản lý)',{letan:0,bacsi:0,thungan:1,tuvan:0,chu:1}],
+  ['Duyệt giảm giá vượt mức',{letan:0,bacsi:0,thungan:0,tuvan:0,chu:1}],
   ['Xem nhật ký toàn phòng khám',{letan:0,bacsi:0,thungan:0,tuvan:0,chu:1}]];
 function vQuanLy(){
   const RK=['letan','bacsi','thungan','tuvan','chu'];
   return `<div class="head"><div><h2>Quản lý</h2><p>Phân quyền, nhật ký, bảng giá và các danh sách chờ Phòng Chuyên môn duyệt.</p></div></div>
   <section class="panel"><header><h3>Phân quyền theo vai trò</h3><small>Bản chạy thử áp dụng đúng bảng này khi đổi vai trò ở góc trên</small></header><div class="scroll"><table class="t matrix"><thead><tr><th>Việc</th>${RK.map(r=>`<th class="num">${ROLES[r].title}</th>`).join('')}</tr></thead><tbody>${PERMS.map(([l,m])=>`<tr><td>${l}</td>${RK.map(r=>`<td class="num">${m[r]?'<b style="color:var(--ok)">Có</b>':'<span style="color:var(--muted)">Không</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p style="margin:0;font-size:13px;color:var(--muted)">Lễ tân, thu ngân, tư vấn chỉ thấy số căn cước dạng 038******123.</p></section>
-  <div class="grid g2"><section class="panel"><header><h3>Nhật ký truy cập hồ sơ</h3><small>Bản thật lưu ở máy chủ, không ai sửa hay xóa được</small></header><div class="scroll"><table class="t"><thead><tr><th>Giờ</th><th>Người</th><th>Khách</th><th>Việc</th></tr></thead><tbody>${D.audit.slice(0,40).map(x=>`<tr><td>${x.at}</td><td>${esc(x.user)}<div style="font-size:12px;color:var(--muted)">${x.role}</div></td><td>${esc(x.pid?P(x.pid)?.name||'':'Toàn bộ dữ liệu mẫu')}</td><td>${esc(x.action)}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Chưa có thao tác nào. Mở một hồ sơ khách để thấy dòng đầu tiên.</td></tr>'}</tbody></table></div></section>
+  <section class="panel"><header><h3>Mức giảm giá cần chủ phòng khám duyệt</h3><small>Thu ngân giảm trong mức này tự lưu, có lý do và ghi nhật ký. Vượt mức thì gửi chủ duyệt.</small></header><div class="dc-form"><label class="f">Giảm trên (% hóa đơn)<input id="dc-pct" type="number" min="0" max="100" step="1" value="${DCFG().pct}"></label><label class="f">Hoặc giảm trên (đồng)<input id="dc-amt" type="number" min="0" step="100000" value="${DCFG().amt}"></label><button class="btn primary" data-act="dc-save">Lưu mức duyệt</button></div><p class="dc-now">Đang áp dụng: giảm trên ${DCFG().pct}% hoặc trên ${money(DCFG().amt)} cần chủ duyệt.</p></section>
+  <div class="grid g2"><section class="panel"><header><h3>Nhật ký truy cập hồ sơ</h3><small>Bản thật lưu ở máy chủ, không ai sửa hay xóa được</small></header><div class="scroll"><table class="t"><thead><tr><th>Giờ</th><th>Người</th><th>Khách</th><th>Việc</th></tr></thead><tbody>${D.audit.slice(0,40).map(x=>`<tr><td>${x.at}</td><td>${esc(x.user)}<div style="font-size:12px;color:var(--muted)">${x.role}</div></td><td>${esc(x.pid?P(x.pid)?.name||'':(x.scope||'Toàn bộ dữ liệu mẫu'))}</td><td>${esc(x.action)}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Chưa có thao tác nào. Mở một hồ sơ khách để thấy dòng đầu tiên.</td></tr>'}</tbody></table></div></section>
   <section class="panel"><header><h3>Bảng giá và khoảng nhắc tái khám</h3><small>Số mẫu, chờ Phòng Chuyên môn duyệt</small></header><table class="t"><thead><tr><th>Dịch vụ</th><th class="num">Giá</th><th class="num">Nhắc sau</th></tr></thead><tbody>${SERVICES.map(s=>`<tr><td>${s.name}</td><td class="num">${money(s.price)}${s.tooth?' / răng':''}</td><td class="num">${s.recall?s.recall+' ngày':'Không'}</td></tr>`).join('')}</tbody></table></section></div>
   <div class="grid g2"><section class="panel"><header><h3>Nhóm thuốc dùng để dò dị ứng</h3><span class="pill plain">Chờ Chuyên môn duyệt</span></header><div class="scroll"><table class="t"><thead><tr><th>Nhóm</th><th>Từ nhận biết (cả cách viết sai thường gặp)</th></tr></thead><tbody>${Object.values(CLASS_TERMS).map(c=>`<tr><td>${c.label}</td><td style="font-size:13px">${c.terms.join(', ')}</td></tr>`).join('')}</tbody></table></div></section>
   <section class="panel"><header><h3>Đơn thuốc mẫu</h3><small>Chỉ người phụ trách chuyên môn (${docName(CM_DID)}) duyệt</small></header><table class="t"><tbody>${tpls().map(t=>`<tr><td>${esc(t.name)}</td><td style="font-size:13px">${t.lines.map(l=>drug(l.drug).name).join(', ')}</td><td>${t.ok?`<span class="pill">Đã duyệt ${vnDate(t.ok.date)} ${t.ok.at}</span>`:'<span class="pill plain">Chờ Chuyên môn duyệt</span>'}</td></tr>`).join('')}</tbody></table></section>
@@ -1969,11 +2069,12 @@ document.addEventListener('click',e=>{
       if(mo!=null&&mo<72&&!gu){$('#pf-gwrap').hidden=false;$('#pf-err').innerHTML='<div class="alert red">Trẻ dưới 72 tháng cần thông tin người giám hộ.</div>';return}
       const ccIn=$('#pf-cccd').value.trim();
       const fields={name,phone,dob,gender:$('#pf-gender').value,address:$('#pf-addr').value.trim(),guardian:mo!=null&&mo<72?gu:'',allergies:$('#pf-alg').value.split(',').map(s=>s.trim()).filter(Boolean),conditions:$('#pf-cond').value.split(',').map(s=>s.trim()).filter(Boolean),source:$('#pf-src').value,consentMsg:$('#pf-msg').checked};
+      if(id&&UI.role!=='bacsi'){const p0=P(id),old=p0.allergies||[],pend=algPend(p0),lost=old.filter(x=>!pend.includes(x)&&!fields.allergies.includes(x));if(lost.length){$('#pf-err').innerHTML=`<div class="alert red">Dị ứng bác sĩ đã xác nhận chỉ bác sĩ bỏ được: ${esc(lost.join(', '))}. Thêm lại vào ô Dị ứng rồi lưu.</div>`;return}p0.algPend=[...pend.filter(x=>fields.allergies.includes(x)),...fields.allergies.filter(x=>!old.includes(x))]}
       if(id){p=P(id);const ch=Object.keys(fields).filter(k=>JSON.stringify(fields[k])!==JSON.stringify(p[k]??''));Object.assign(p,fields);
         if(ccIn&&ccIn!==p.cccd){p.cccd=ccIn;ch.push('mã định danh')}else if(!ccIn&&can.seeCccd()&&p.cccd){p.cccd='';ch.push('xóa mã định danh')}
         const NM={name:'họ tên',phone:'điện thoại',dob:'ngày sinh',gender:'giới tính',address:'địa chỉ',guardian:'người giám hộ',allergies:'dị ứng',conditions:'bệnh nền',source:'nguồn',consentMsg:'đồng ý nhận tin'};
         audit(id,'Sửa hồ sơ: '+(ch.map(k=>NM[k]||k).join(', ')||'không đổi'))}
-      else{p=Object.assign({id:'p'+(D.seq++),code:'KH'+String(2401+D.patients.length).padStart(5,'0'),group:'Khách mới',consentData:{at:TODAY,how:'Xác nhận tại quầy trên phần mềm'},cccd:ccIn,teeth:{},history:[],plan:[],recallDue:null,recallReason:''},fields);D.patients.push(p);audit(p.id,'Tạo hồ sơ')}
+      else{p=Object.assign({id:'p'+(D.seq++),code:'KH'+String(2401+D.patients.length).padStart(5,'0'),group:'Khách mới',consentData:{at:TODAY,how:'Xác nhận tại quầy trên phần mềm'},cccd:ccIn,teeth:{},history:[],plan:[],recallDue:null,recallReason:'',algPend:[...fields.allergies]},fields);D.patients.push(p);audit(p.id,'Tạo hồ sơ')}
       if(!id&&t.dataset.queue&&DOCTORS.some(d=>d.id===t.dataset.queue)){const did=t.dataset.queue;addWalkin(p.id,did,'Tại quầy');audit(p.id,'Vào hàng chờ vãng lai của '+docName(did)+' (không xếp vào lịch)');closeModal();toast(`Đã tạo hồ sơ ${p.code} và đưa vào hàng chờ ${docName(did)}`);UI.pid=p.id;UI.view='hoso';render();break}
       closeModal();toast(id?'Đã lưu hồ sơ':'Đã tạo hồ sơ '+p.code);UI.pid=p.id;UI.view='hoso';render();break;}
     case 'new-appt':$('#results').hidden=true;apptForm({pid:t.dataset.pid,sid:t.dataset.sid,did:t.dataset.did,start:t.dataset.start?+t.dataset.start:undefined});break;
@@ -2004,8 +2105,9 @@ document.addEventListener('click',e=>{
     case 'walkin-ok':{const it=t.dataset.intake&&D.intake.find(x=>x.id===t.dataset.intake);addWalkin(t.dataset.pid,t.dataset.did,it?'Quét mã QR':'Tại quầy');if(it){it.status='xong';it.did=t.dataset.did}audit(t.dataset.pid,'Vào hàng chờ vãng lai của '+docName(t.dataset.did)+' (không xếp vào lịch)');closeModal();toast('Đã đưa khách vào hàng chờ');render();break;}
     case 'start-exam':startExam(id);break;
     case 'more':moreSheet();break;
-    case 'call-log':{const p=P(id);modal(`<h3>Ghi cuộc gọi cho ${esc(p.name)}</h3><p style="margin:0">${p.phone}, ${esc(p.recallReason||'')}</p><footer style="justify-content:flex-start">${['Khách hẹn sẽ đến','Không nghe máy','Khách bận, gọi lại sau','Khách không muốn đến','Sai số'].map(r=>`<button class="btn" data-act="call-save" data-id="${p.id}" data-r="${r}">${r}</button>`).join('')}<button class="btn ghost" data-act="close">Hủy</button></footer>`);break;}
-    case 'call-save':{const p=P(id);(p.calls=p.calls||[]).unshift({at:vnDate(TODAY)+' '+clock(),res:t.dataset.r,by:me().name});audit(p.id,'Gọi nhắc tái khám: '+t.dataset.r);closeModal();toast('Đã ghi kết quả cuộc gọi');if(t.dataset.r==='Khách hẹn sẽ đến'&&can.editAppt())apptForm({pid:p.id,sid:'caovoi'});else render();break;}
+    case 'tv-sort':{UI.tvSort=t.dataset.v;render();break;}
+    case 'call-log':{const p=P(id);modal(`<h3>Ghi cuộc gọi cho ${esc(p.name)}</h3><p style="margin:0">${p.phone}, ${esc(p.plan.length&&UI.role==='tuvan'?'đã tư vấn '+svc(p.plan[0].sid).name.toLowerCase():(p.recallReason||''))}</p>${p.consentMsg?'':'<div class="alert amber">Khách không đồng ý nhận tin. Chỉ gọi điện, không gửi Zalo hay tin nhắn.</div>'}<footer style="justify-content:flex-start">${['Khách hẹn sẽ đến','Không nghe máy','Khách bận, gọi lại sau','Khách không muốn đến','Sai số'].map(r=>`<button class="btn" data-act="call-save" data-id="${p.id}" data-r="${r}">${r}</button>`).join('')}<button class="btn ghost" data-act="close">Hủy</button></footer>`);break;}
+    case 'call-save':{const p=P(id);(p.calls=p.calls||[]).unshift({at:vnDate(TODAY)+' '+clock(),res:t.dataset.r,by:me().name});audit(p.id,(UI.role==='tuvan'&&p.plan.length?'Gọi khách đã tư vấn: ':'Gọi nhắc tái khám: ')+t.dataset.r);closeModal();toast('Đã ghi kết quả cuộc gọi');if(t.dataset.r==='Khách hẹn sẽ đến'&&can.editAppt())apptForm({pid:p.id,sid:'caovoi'});else render();break;}
     case 'qr-open':qrForm();break;
     case 'qr-submit':qrSubmit();break;
     case 'qr-merge':{const it=D.intake.find(x=>x.id===id),p=P(it.dupId);if(it.health)p.selfReport=it.health;audit(p.id,`Lễ tân xác nhận phiếu QR "${it.name}" là khách cũ ${p.name}`);it.status='xong';it.pid=p.id;const did=p.history[0]?.doctor||DOCTORS[0].id;addWalkin(p.id,did,'Quét mã QR');toast('Đã đưa '+p.name+' vào hàng chờ '+docName(did));render();break;}
@@ -2045,11 +2147,13 @@ document.addEventListener('click',e=>{
     case 'finish-exam':finishExam(id);break;
     case 'to-sign':{const b=$('#signBox');if(b)b.scrollIntoView({behavior:'smooth',block:'center'});break;}
     case 'preg':{const e=examOf(UI.apptId),p=P(A(UI.apptId).pid);e.preg=t.dataset.v;audit(p.id,'Bác sĩ ghi tình trạng thai: '+({co:'có thai',khong:'không có thai',chuaro:'chưa rõ'})[e.preg]);draftAt=clock();render();break;}
+    case 'alg-ok':{if(UI.role!=='bacsi')return;const p=P(id),v=t.dataset.v;p.algPend=algPend(p).filter(x=>x!==v);audit(p.id,`Bác sĩ xác nhận dị ứng "${v}"`);toast('Đã xác nhận dị ứng, có ghi nhật ký');render();break;}
+    case 'alg-no':{if(UI.role!=='bacsi')return;const p=P(id),v=t.dataset.v;p.algPend=algPend(p).filter(x=>x!==v);p.allergies=p.allergies.filter(x=>x!==v);audit(p.id,`Bác sĩ bỏ dị ứng khách tự khai "${v}" (hỏi lại thấy không đúng)`);toast('Đã bỏ dòng dị ứng, có ghi nhật ký');render();break;}
     case 'add-health':{const p=P(id),k=t.dataset.k,lbl=k==='allergies'?'dị ứng':'bệnh nền';
-      modal(`<h3>Thêm ${lbl} cho ${esc(p.name)}</h3><p style="margin:0;font-size:14px;color:var(--muted)">Ghi đúng lời khách kể, viết sai hay câu dài cũng được. Phần mềm vẫn dò được khi kê đơn.</p><label class="f">${lbl[0].toUpperCase()+lbl.slice(1)}<input id="hl-v" placeholder="${k==='allergies'?'Ví dụ: uống amoxicilin bị nổi mẩn':'Ví dụ: tăng huyết áp, đang mang thai 3 tháng'}"></label><div id="hl-err"></div><footer><button class="btn" data-act="close">Hủy</button><button class="btn primary" data-act="save-health" data-id="${p.id}" data-k="${k}">Lưu vào hồ sơ</button></footer>`);break;}
+      modal(`<h3>Thêm ${lbl} cho ${esc(p.name)}</h3><p style="margin:0;font-size:14px;color:var(--muted)">Ghi đúng lời khách kể, viết sai hay câu dài cũng được. Phần mềm vẫn dò được khi kê đơn.${k==='allergies'&&UI.role!=='bacsi'?' Dị ứng bạn ghi sẽ hiện là khách tự khai, chờ bác sĩ xác nhận khi khám.':''}</p><label class="f">${lbl[0].toUpperCase()+lbl.slice(1)}<input id="hl-v" placeholder="${k==='allergies'?'Ví dụ: uống amoxicilin bị nổi mẩn':'Ví dụ: tăng huyết áp, đang mang thai 3 tháng'}"></label><div id="hl-err"></div><footer><button class="btn" data-act="close">Hủy</button><button class="btn primary" data-act="save-health" data-id="${p.id}" data-k="${k}">Lưu vào hồ sơ</button></footer>`);break;}
     case 'save-health':{const p=P(id),k=t.dataset.k,v=$('#hl-v').value.trim();if(!v){$('#hl-err').innerHTML='<div class="alert red">Nhập nội dung trước khi lưu.</div>';return}
       if(p[k].some(x=>norm(x)===norm(v))){$('#hl-err').innerHTML='<div class="alert amber">Hồ sơ đã có dòng này.</div>';return}
-      p[k].push(v);audit(p.id,`${me().title} thêm ${k==='allergies'?'dị ứng':'bệnh nền'} "${v}"${UI.view==='kham'?' trong lúc khám':''}`);closeModal();toast('Đã thêm vào hồ sơ và ghi nhật ký');render();break;}
+      p[k].push(v);const selfA=k==='allergies'&&UI.role!=='bacsi';if(selfA)p.algPend=[...algPend(p),v];audit(p.id,`${me().title} thêm ${k==='allergies'?'dị ứng':'bệnh nền'} "${v}"${selfA?' (khách tự khai, chờ bác sĩ xác nhận)':''}${UI.view==='kham'?' trong lúc khám':''}`);closeModal();toast(selfA?'Đã ghi dị ứng khách tự khai. Bác sĩ sẽ xác nhận khi khám':'Đã thêm vào hồ sơ và ghi nhật ký');render();break;}
     case 'rx-fill':{const p=P(id),mo=monthsOld(p.dob);closeModal();
       modal(`<h3>Bổ sung thông tin để gửi đơn</h3><p style="margin:0;font-size:14px;color:var(--muted)">${esc(p.name)}, các trường bắt buộc theo đặc tả Đơn thuốc quốc gia</p><div class="grid g2" style="gap:12px">
        <label class="f">Ngày sinh<input type="date" id="rf-dob" value="${p.dob||''}" max="${TODAY}"></label><label class="f">Giới tính<select id="rf-gender"><option value="">Chưa ghi</option><option ${p.gender==='Nữ'?'selected':''}>Nữ</option><option ${p.gender==='Nam'?'selected':''}>Nam</option><option ${p.gender==='Khác'?'selected':''}>Khác</option></select></label></div>
@@ -2078,6 +2182,7 @@ document.addEventListener('click',e=>{
       const big=needApprove(Object.assign({},b,{discount:v}));
       if(big&&!can.approveDiscount()){b.discReq={amount:v,reason:why,by:me().name,at:clock()};UI.discDraft=null;audit(b.pid,`Đề nghị giảm ${money(v)} (lý do: ${why}), chờ chủ phòng khám duyệt`);toast('Đã gửi chủ phòng khám duyệt');render();return}
       UI.discDraft=null;audit(b.pid,`Giảm giá từ ${money(b.discount)} thành ${money(v)}${why?' (lý do: '+why+')':''}${big?', chủ phòng khám tự duyệt':''}`);b.discount=v;UI.payAmt=null;toast('Đã lưu giảm giá '+money(v));render();break;}
+    case 'dc-save':{if(UI.role!=='chu')return;const pc=Math.round(+$('#dc-pct').value),am=Math.round(+$('#dc-amt').value);if(!(pc>=0&&pc<=100)||!(am>=0)||$('#dc-pct').value===''||$('#dc-amt').value===''){toast('Nhập phần trăm từ 0 đến 100 và số tiền từ 0 trở lên',true);return}const c=DCFG();if(c.pct===pc&&c.amt===am){toast('Mức duyệt chưa thay đổi');return}D.audit.unshift({at:clock(),date:TODAY,user:me().name,role:me().title,pid:null,scope:'Cài đặt phòng khám',action:`Đổi mức giảm giá cần duyệt từ trên ${c.pct}% hoặc ${money(c.amt)} thành trên ${pc}% hoặc ${money(am)}`});D.discCfg={pct:pc,amt:am};toast(`Đã lưu: giảm trên ${pc}% hoặc trên ${money(am)} cần chủ duyệt`);render();break;}
     case 'disc-approve':{const b=B(id),r=b.discReq;audit(b.pid,`Chủ phòng khám duyệt giảm ${money(r.amount)} do ${r.by} đề nghị (lý do: ${r.reason})`);b.discount=r.amount;b.discReq=null;UI.payAmt=null;toast('Đã duyệt giảm giá');render();break;}
     case 'disc-reject':{const b=B(id),r=b.discReq;audit(b.pid,`Chủ phòng khám từ chối giảm ${money(r.amount)} do ${r.by} đề nghị`);b.discReq=null;toast('Đã từ chối, giữ giá cũ');render();break;}
     case 'disc-cancel':{const b=B(id),r=b.discReq;audit(b.pid,`${me().name} hủy đề nghị giảm ${money(r.amount)}`);b.discReq=null;toast('Đã hủy đề nghị giảm giá');render();break;}
