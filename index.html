@@ -1051,6 +1051,7 @@ body{min-height:100vh}
 .next-go{display:flex;justify-content:flex-end}
 .doc-rest .pill.s-xacnhan{display:none}
 @media (max-width:820px){.next-card{grid-template-columns:1fr}.next-go .btn{width:100%}}
+.sec-pay .row{flex-wrap:nowrap}.sec-pay .row .amt{font-size:15px}
 
 </style>
 
@@ -1429,7 +1430,8 @@ const svgI=p=>`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentC
 const can={
   editAppt:()=>['letan','tuvan','chu'].includes(UI.role),
   exam:()=>UI.role==='bacsi',
-  collect:()=>['thungan','chu'].includes(UI.role),
+  collect:()=>['thungan','letan','chu'].includes(UI.role),
+  discount:()=>['thungan','chu'].includes(UI.role),
   editPatient:()=>['letan','tuvan','chu'].includes(UI.role),
   seeClinical:()=>['bacsi','chu','tuvan'].includes(UI.role),
   seeCccd:()=>['bacsi','chu'].includes(UI.role),
@@ -1529,7 +1531,7 @@ function vToday(){
     </div><div class="flow-side">
     <section class="panel"><header><h3>Tình trạng ghế</h3><small>${clock()}</small></header><div class="chairs">${chairs}</div></section>
     ${sec('Đang khám',inChair.length,'',inChair.map(a=>apptRow(a)).join('')||'<div class="empty">Chưa có khách đang khám.</div>','sec-kham')}
-    ${sec('Chờ thu tiền',toPay.length,'đã khám xong, chưa thanh toán',toPay.map(b=>{const p=P(b.pid);return `<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(b.items.map(i=>i.name).join(', ')))}, ${nw(docName(b.did))}</div></div></div>`}).join('')||'<div class="empty">Không có khách chờ thu tiền.</div>','sec-pay')}
+    ${sec('Chờ thu tiền',toPay.length,'đã khám xong, chưa thanh toán',toPay.map(b=>{const p=P(b.pid);return `<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(b.items.map(i=>i.name).join(', ')))}, ${nw(docName(b.did))}</div></div><b class="amt">${money(remain(b))}</b>${can.collect()?`<button class="btn sm" data-act="open-bill" data-id="${b.id}">Thu tiền</button>`:''}</div>`}).join('')||'<div class="empty">Không có khách chờ thu tiền.</div>','sec-pay')}
     ${sec('Hẹn tái khám',recall.length,'đến hạn hoặc quá hạn, chưa có lịch',recall.slice(0,5).map(p=>`<div class="row"><div class="main"><div class="nm"><button class="link pn" data-act="open-p" data-id="${p.id}">${esc(p.name)}</button>${algTag(p)}</div><div class="sub">${nw(esc(p.recallReason))}, ${nw(p.recallDue<TODAY?overTxt(daysBetween(p.recallDue,TODAY))+', hạn '+vnDate(p.recallDue):'đến hạn '+vnDate(p.recallDue))}</div></div><button class="btn sm" data-act="new-appt" data-pid="${p.id}" data-sid="caovoi">Đặt lịch</button></div>`).join('')+(recall.length>5?`<button class="btn sm ghost" data-act="nav" data-v="chamsoc">Xem cả ${recall.length} khách</button>`:'')||'<div class="empty">Không có khách đến hạn tái khám.</div>','sec-recall')}
     ${intakePanel()}
     </div></div>`;
@@ -1901,7 +1903,7 @@ function vThuNgan(){
   if(b&&['cho','no'].includes(b.status)&&can.collect()){const p=P(b.pid),due=remain(b),isDebt=b.status==='no';
     detail=`<section class="panel" id="billBox"><header><h3>${isDebt?'Thu nợ':'Phiếu thu'}: ${esc(p.name)}</h3><small>${p.code}, ${docName(b.did)}</small></header>
      <table class="t"><tbody>${b.items.map(i=>`<tr><td>${esc(i.name)}</td><td class="num">${money(i.price*i.qty)}</td></tr>`).join('')}</tbody></table>
-     ${isDebt?'':discountBox(b)}
+     ${isDebt?'':(can.discount()?discountBox(b):(b.discount?`<div class="alert grey">Đã giảm ${money(b.discount)}. Cần giảm thêm thì nhờ thu ngân hoặc chủ phòng khám.</div>`:''))}
      <div class="grid g2" style="gap:12px"><label class="f">Hình thức<select id="b-method" data-bill="method"><option value="tienmat">Tiền mặt</option><option value="chuyenkhoan" ${UI.method==='chuyenkhoan'?'selected':''}>Chuyển khoản</option><option value="the" ${UI.method==='the'?'selected':''}>Thẻ</option></select></label></div>
      ${isDebt?`<div class="alert grey">Hóa đơn ngày ${vnDate(b.date)}: tổng ${money(b.total-b.discount)}, đã trả ${money(b.paid)}.</div>`:''}
      <div class="sum"><span>${isDebt?'Còn nợ':'Phải thu'}</span><span id="b-due">${money(due)}</span></div>
@@ -1937,7 +1939,7 @@ const PERMS=[
   ['Đặt, đổi, hủy lịch hẹn',{letan:1,bacsi:0,thungan:0,tuvan:1,chu:1}],
   ['Khám, kê đơn, ký',{letan:0,bacsi:1,thungan:0,tuvan:0,chu:0}],
   ['Xem sơ đồ răng và lịch sử điều trị',{letan:0,bacsi:1,thungan:0,tuvan:1,chu:1}],
-  ['Thu tiền',{letan:0,bacsi:0,thungan:1,tuvan:0,chu:1}],
+  ['Thu tiền',{letan:1,bacsi:0,thungan:1,tuvan:0,chu:1}],
   ['Giảm giá trong mức cho phép (mức đặt ở Quản lý)',{letan:0,bacsi:0,thungan:1,tuvan:0,chu:1}],
   ['Duyệt giảm giá vượt mức',{letan:0,bacsi:0,thungan:0,tuvan:0,chu:1}],
   ['Xem nhật ký toàn phòng khám',{letan:0,bacsi:0,thungan:0,tuvan:0,chu:1}]];
@@ -2177,7 +2179,7 @@ document.addEventListener('click',e=>{
     case 'recall-skip':{saveRecallDate('Để sau');UI.recall=null;$('#modal').innerHTML='';toast('Đã lưu ngày nhắc tái khám vào hồ sơ, chưa đặt lịch');go('kham',{apptId:null});break;}
     case 'open-bill':if(!can.collect()){toast('Vai trò của bạn chỉ xem được danh sách',true);return}UI.payAmt=null;UI.method='tienmat';go('thungan',{billId:id});break;
     case 'close-bill':go('thungan',{billId:null});break;
-    case 'disc-ok':{const b=B(id),v=Math.max(0,Math.min(+$('#b-disc').value||0,b.total)),why=$('#b-disc-why').value.trim();
+    case 'disc-ok':{if(!can.discount()){toast('Chỉ thu ngân và chủ phòng khám được giảm giá',true);return}const b=B(id),v=Math.max(0,Math.min(+$('#b-disc').value||0,b.total)),why=$('#b-disc-why').value.trim();
       if(v===b.discount){toast('Mức giảm chưa thay đổi');return}if(v>0&&!why){toast('Ghi lý do giảm giá trước khi xác nhận',true);return}
       const big=needApprove(Object.assign({},b,{discount:v}));
       if(big&&!can.approveDiscount()){b.discReq={amount:v,reason:why,by:me().name,at:clock()};UI.discDraft=null;audit(b.pid,`Đề nghị giảm ${money(v)} (lý do: ${why}), chờ chủ phòng khám duyệt`);toast('Đã gửi chủ phòng khám duyệt');render();return}
