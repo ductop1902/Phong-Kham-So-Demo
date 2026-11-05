@@ -8,4 +8,4 @@ Bản chạy thử giao diện phần mềm Phòng Khám Số cho Nha Khoa Tâm 
 
 **Chỉ có dữ liệu mẫu.** Không nhập thông tin người bệnh thật. Dữ liệu chỉ lưu trong trình duyệt của từng máy, chưa có máy chủ, nên phiếu khách điền trên điện thoại chưa hiện ở hàng chờ máy quầy.
 
-Bản hiện tại: bản 17 (05/11/2026).
+Bản hiện tại: bản 18 (05/11/2026).
