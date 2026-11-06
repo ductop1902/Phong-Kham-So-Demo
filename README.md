@@ -9,3 +9,5 @@ Bản chạy thử giao diện phần mềm Phòng Khám Số cho Nha Khoa Tâm 
 **Chỉ có dữ liệu mẫu.** Không nhập thông tin người bệnh thật. Dữ liệu chỉ lưu trong trình duyệt của từng máy, chưa có máy chủ, nên phiếu khách điền trên điện thoại chưa hiện ở hàng chờ máy quầy.
 
 Bản hiện tại: bản 19 (05/11/2026).
+
+Bản mới để so (06/11/2026): https://ductop1902.github.io/Phong-Kham-So-Demo/ban-moi/ (khung thanh bên tối, Hôm nay dạng bốn cột, Khám chia thẻ, Thu ngân không hộp thoại). Bản 19 giữ nguyên. Hai bản dùng chung dữ liệu mẫu trên cùng máy. Quyết định thiết kế ghi ở `DESIGN.md`.
